@@ -3,28 +3,295 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GP Paper 1 — Master Essay Playbook</title>
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#F4EEDF">
+<title>GP Paper 1 — Master Essay Playbook v3 | YIJC High-Weight Revision</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0b1020;--panel:#121a2e;--panel2:#18223a;--text:#edf2ff;--muted:#aab6d3;--accent:#7dd3fc;--accent2:#a7f3d0;--border:#293754;--warn:#fde68a}
-*{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:linear-gradient(180deg,#0b1020,#0e1629);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;line-height:1.65}
-header{padding:70px 7vw 55px;border-bottom:1px solid var(--border);background:radial-gradient(circle at 80% 0%,#183451,transparent 45%)}
-h1{font-size:clamp(2.3rem,5vw,5rem);line-height:1.02;margin:0 0 18px;letter-spacing:-.04em} h2{font-size:2rem;margin-top:0} h3{color:var(--accent);margin-top:1.7rem}
-p,li{color:#d8e0f3} strong{color:#fff} code,.formula{font-family:ui-monospace,SFMono-Regular,monospace;color:var(--accent2)}
-.wrap{max-width:1200px;margin:auto;padding:42px 7vw}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
-.card{background:rgba(18,26,46,.88);border:1px solid var(--border);border-radius:16px;padding:24px;box-shadow:0 12px 35px #0002}
-.badge{display:inline-block;padding:4px 9px;border:1px solid var(--border);border-radius:999px;color:var(--accent);font-size:.8rem;margin:3px}
-nav{position:sticky;top:0;z-index:5;background:#0b1020ee;backdrop-filter:blur(14px);border-bottom:1px solid var(--border);overflow:auto;white-space:nowrap}
-nav a{display:inline-block;padding:13px 14px;color:var(--muted);text-decoration:none;font-size:.9rem}nav a:hover{color:#fff}
-.callout{border-left:4px solid var(--accent);background:var(--panel2);padding:18px 20px;border-radius:0 12px 12px 0;margin:20px 0}
-.warn{border-left-color:var(--warn)} table{width:100%;border-collapse:collapse;margin:18px 0}th,td{border:1px solid var(--border);padding:12px;text-align:left;vertical-align:top}th{color:var(--accent);background:#111a2d}
-.toc a{color:var(--accent2)} .small{font-size:.9rem;color:var(--muted)}
-.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.flow span{background:var(--panel2);border:1px solid var(--border);padding:8px 12px;border-radius:9px}
-.good{color:var(--accent2)} .bad{color:#fca5a5}.quote{font-style:italic;border-left:3px solid var(--accent2);padding-left:16px;color:#e7edf9}
-footer{padding:35px 7vw;color:var(--muted);border-top:1px solid var(--border)}
-@media print{nav{display:none}body{background:white;color:black}.card{break-inside:avoid;background:white;color:black;border:1px solid #bbb}p,li{color:#111}h1,h2,h3{color:#111}}
+
+:root{
+  --paper:#F4EEDF;
+  --paper-raised:#FFFDF7;
+  --paper-sunken:#ECE3CB;
+  --ink:#22283B;
+  --ink-soft:#635A49;
+  --rule:#DDD0A8;
+  --rule-strong:#C7B689;
+  --mark-red:#A23B2E;
+  --mark-green:#4C6B4A;
+  --stripe:rgba(34,40,59,.045);
+  --glow:rgba(162,59,46,.07);
+  --shadow:rgba(34,28,15,.16);
+
+  --font-display:'Fraunces',Georgia,'Times New Roman',serif;
+  --font-body:'Source Sans 3','Segoe UI',system-ui,-apple-system,sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular','Courier New',monospace;
+
+  --sidebar-w:276px;
+  --radius:8px;
+}
+html[data-theme="lamp"]{
+  --paper:#1B1712;
+  --paper-raised:#251F17;
+  --paper-sunken:#141110;
+  --ink:#F1E8D6;
+  --ink-soft:#B4A88C;
+  --rule:#3B3325;
+  --rule-strong:#4F452E;
+  --mark-red:#E2775F;
+  --mark-green:#8FAE86;
+  --stripe:rgba(241,232,214,.05);
+  --glow:rgba(226,119,95,.09);
+  --shadow:rgba(0,0,0,.45);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--font-body);
+  line-height:1.65;
+  font-size:16.5px;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  transition:background-color .3s ease,color .3s ease;
+}
+::selection{background:var(--mark-red);color:var(--paper-raised)}
+img{max-width:100%}
+
+h1,h2{font-family:var(--font-display);color:var(--ink);letter-spacing:-.02em}
+h1{
+  font-size:clamp(2.4rem,5.6vw,4.6rem);line-height:1.03;margin:0 0 20px;
+  font-weight:520;font-variation-settings:"opsz" 90,"SOFT" 30;
+}
+h2{
+  font-size:clamp(1.55rem,3vw,2.15rem);margin:0 0 22px;font-weight:560;
+  font-variation-settings:"opsz" 60,"SOFT" 20;
+}
+h3{
+  font-family:var(--font-body);color:var(--mark-red);
+  font-size:1.04rem;font-weight:700;margin:1.6rem 0 .6rem;letter-spacing:.005em;
+}
+h3:first-child{margin-top:0}
+
+p,li{color:var(--ink);max-width:72ch}
+p{margin:0 0 1rem}
+strong{color:var(--ink);font-weight:700}
+em{font-style:italic}
+
+code,.formula{
+  font-family:var(--font-mono);color:var(--mark-green);background:var(--stripe);
+  padding:.15em .4em;border-radius:4px;font-size:.92em;
+}
+p.formula{display:inline-block;padding:.6em 1em;font-size:1rem}
+
+ul,ol{padding-left:1.25em}
+li{margin:.35em 0}
+ul li::marker{color:var(--mark-green)}
+ol li::marker{color:var(--mark-red);font-family:var(--font-mono);font-weight:600}
+
+a{color:var(--mark-red);text-underline-offset:2px}
+
+.wrap{max-width:1040px;margin:0 auto;padding:56px clamp(20px,5vw,56px)}
+
+.skip-link{
+  position:absolute;left:-999px;top:0;background:var(--mark-red);color:var(--paper-raised);
+  padding:12px 22px;border-radius:0 0 8px 0;font-weight:600;text-decoration:none;z-index:300;
+}
+.skip-link:focus{left:0}
+
+.progress-track{position:fixed;top:0;left:0;right:0;height:3px;background:var(--rule);z-index:100}
+.progress-bar{height:100%;width:0%;background:var(--mark-red)}
+
+header{
+  position:relative;padding:104px 0 72px;
+  background:
+    radial-gradient(ellipse 900px 480px at 82% -10%,var(--glow),transparent 60%),
+    repeating-linear-gradient(to bottom,transparent 0 34px,var(--rule) 34px 35px),
+    var(--paper-sunken);
+  border-bottom:3px double var(--rule-strong);
+}
+.badge{
+  display:inline-block;font-family:var(--font-mono);font-size:.72rem;
+  letter-spacing:.08em;text-transform:uppercase;padding:7px 14px;
+  border:1px solid var(--rule-strong);border-radius:999px;
+  color:var(--mark-red);background:var(--paper-raised);margin:0 0 20px;
+}
+header .small{display:block;margin-top:18px}
+
+.layout{display:flex;align-items:flex-start;position:relative}
+.sidenav{
+  width:var(--sidebar-w);flex-shrink:0;background:var(--paper-sunken);
+  border-right:1px solid var(--rule);padding:26px 18px;
+  position:sticky;top:0;height:100vh;overflow-y:auto;z-index:20;
+}
+.sidenav-head{display:flex;align-items:center;justify-content:space-between;margin:0 0 18px;padding:0 8px}
+.sidenav-eyebrow{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
+.sidenav ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1px}
+.sidenav a{
+  display:flex;align-items:baseline;gap:10px;padding:9px 8px;border-radius:6px;
+  color:var(--ink-soft);text-decoration:none;font-size:.89rem;
+  transition:background .15s,color .15s;
+}
+.sidenav a .num{font-family:var(--font-mono);font-size:.7rem;color:var(--rule-strong);min-width:1.5em}
+.sidenav a:hover{background:var(--paper-raised);color:var(--ink)}
+.sidenav a.active{background:var(--paper-raised);color:var(--mark-red);font-weight:600}
+.sidenav a.active .num{color:var(--mark-red)}
+
+.scrim{position:fixed;inset:0;background:rgba(20,16,10,.45);opacity:0;pointer-events:none;transition:opacity .25s;z-index:55}
+.scrim.is-open{opacity:1;pointer-events:auto}
+
+.topbar{display:none}
+.hamburger,.theme-toggle,.fab-top{
+  appearance:none;border:1px solid var(--rule-strong);background:var(--paper-raised);
+  color:var(--ink);border-radius:8px;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;
+  width:38px;height:38px;flex-shrink:0;transition:background .15s,transform .15s;
+}
+.hamburger:hover,.theme-toggle:hover{background:var(--paper-sunken)}
+.icon-moon{display:none}
+html[data-theme="lamp"] .icon-sun{display:none}
+html[data-theme="lamp"] .icon-moon{display:block}
+
+main{flex:1;min-width:0;position:relative;counter-reset:sect}
+main>section{position:relative;isolation:isolate;counter-increment:sect}
+main>section:nth-child(odd){
+  background-image:repeating-linear-gradient(to bottom,transparent 0 34px,var(--rule) 34px 35px);
+}
+main>section:nth-child(even){background:var(--paper-sunken)}
+main>section::before{
+  content:counter(sect,decimal-leading-zero);position:absolute;top:6px;right:clamp(10px,2.5vw,28px);
+  font-family:var(--font-display);font-weight:300;font-size:clamp(3.2rem,6.4vw,5.6rem);
+  color:var(--ink);opacity:.06;z-index:-1;line-height:1;letter-spacing:-.03em;
+  pointer-events:none;user-select:none;
+}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:16px;margin:20px 0}
+.card{
+  background:var(--paper-raised);border:1px solid var(--rule);border-radius:var(--radius);
+  padding:22px 24px;box-shadow:0 1px 2px var(--shadow);
+  transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+}
+.card:hover{transform:translateY(-3px);box-shadow:0 14px 28px -16px var(--shadow);border-color:var(--rule-strong)}
+
+.flow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:22px 0}
+.flow span{
+  background:var(--paper-raised);border:1px solid var(--rule);padding:10px 16px;
+  border-radius:999px;font-size:.92rem;font-weight:600;box-shadow:0 1px 2px var(--shadow);
+}
+.flow span strong{color:var(--mark-red);margin-right:3px}
+.flow b{color:var(--mark-red);font-weight:700;font-size:1.05rem}
+
+.callout{
+  position:relative;background:var(--paper-raised);border:1px solid var(--rule);
+  border-left:4px solid var(--mark-green);border-radius:var(--radius);
+  padding:20px 22px 20px 54px;margin:24px 0;box-shadow:0 1px 2px var(--shadow);
+}
+.callout.warn{border-left-color:var(--mark-red)}
+.callout::before{
+  content:"\2713";position:absolute;left:16px;top:22px;width:22px;height:22px;border-radius:50%;
+  background:var(--mark-green);color:var(--paper-raised);font-size:.72rem;font-weight:700;
+  line-height:22px;text-align:center;font-family:var(--font-body);
+}
+.callout.warn::before{content:"!";background:var(--mark-red)}
+.callout>strong:first-of-type{color:var(--mark-green)}
+.callout.warn>strong:first-of-type{color:var(--mark-red)}
+.callout p{margin-top:8px}
+.callout p:last-child{margin-bottom:0}
+
+table{width:100%;border-collapse:collapse;margin:22px 0;font-size:.94rem;border:1px solid var(--rule)}
+th{
+  background:var(--ink);color:var(--paper);font-family:var(--font-mono);font-size:.74rem;
+  text-transform:uppercase;letter-spacing:.06em;font-weight:600;padding:13px 16px;text-align:left;
+}
+td{padding:13px 16px;border-top:1px solid var(--rule);vertical-align:top}
+tr:nth-child(even) td{background:var(--stripe)}
+
+.toc a{color:var(--mark-green)}
+.small{font-size:.87rem;color:var(--ink-soft);max-width:60ch}
+
+.quote{
+  font-family:var(--font-display);font-style:italic;font-size:1.14rem;line-height:1.55;
+  color:var(--ink);border-left:3px solid var(--mark-green);margin:24px 0;
+  padding:2px 0 2px 44px;position:relative;max-width:64ch;font-variation-settings:"opsz" 30;
+}
+.quote::before{
+  content:"\201C";position:absolute;left:2px;top:-14px;font-size:2.6rem;
+  color:var(--mark-green);opacity:.45;font-style:normal;
+}
+.good{color:var(--mark-green);font-weight:600}
+.bad{color:var(--mark-red);font-weight:600}
+
+footer{background:var(--paper-sunken);border-top:3px double var(--rule-strong);padding:44px 20px}
+footer p{max-width:640px;margin:0 auto 10px;text-align:center;color:var(--ink-soft);font-size:.92rem}
+footer p:first-child{color:var(--ink);font-size:1rem}
+footer strong{color:var(--ink)}
+
+.fab-top{
+  position:fixed;right:22px;bottom:22px;z-index:30;width:44px;height:44px;border-radius:50%;
+  opacity:0;transform:translateY(10px);pointer-events:none;transition:opacity .2s,transform .2s;
+  box-shadow:0 8px 20px var(--shadow);
+}
+.fab-top.is-visible{opacity:1;transform:translateY(0);pointer-events:auto}
+
+a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-offset:2px;border-radius:4px}
+
+@media (max-width:959px){
+  .layout{display:block}
+  .sidenav{
+    position:fixed;top:0;left:0;height:100vh;width:82vw;max-width:320px;
+    transform:translateX(-101%);transition:transform .28s ease;z-index:60;
+    box-shadow:10px 0 30px var(--shadow);
+  }
+  .sidenav.is-open{transform:translateX(0)}
+  .topbar{
+    display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:40;
+    background:var(--paper);border-bottom:1px solid var(--rule);padding:10px 16px;
+  }
+  .topbar-label{font-family:var(--font-mono);font-size:.8rem;color:var(--ink-soft);flex:1;text-transform:uppercase;letter-spacing:.04em}
+  main>section::before{display:none}
+}
+@media (min-width:960px){ .hamburger{display:none} }
+
+@media (max-width:640px){
+  table{display:block;overflow-x:auto;white-space:nowrap}
+  .wrap{padding:40px 20px}
+  header{padding:72px 0 48px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{transition-duration:.001ms!important;animation-duration:.001ms!important;scroll-behavior:auto!important}
+}
+
+@media print{
+  /* force ink-safe values regardless of which on-screen theme was active */
+  :root,html[data-theme="lamp"]{
+    --paper:#fff;--paper-raised:#fff;--paper-sunken:#fff;
+    --ink:#111;--ink-soft:#333;--rule:#999;--rule-strong:#666;
+    --mark-red:#111;--mark-green:#111;--stripe:transparent;--glow:transparent;--shadow:transparent;
+  }
+  .sidenav,.topbar,.scrim,.progress-track,.fab-top,.skip-link{display:none!important}
+  .layout{display:block}
+  body{background:#fff}
+  main>section::before{display:none}
+  main>section{background:#fff!important;background-image:none!important}
+  .wrap{max-width:100%;padding:0 0 20px}
+  .card,.callout{box-shadow:none;border:1px solid #999;break-inside:avoid}
+  a{text-decoration:underline}
+  table{page-break-inside:auto}
+  tr{page-break-inside:avoid}
+  header{border-bottom:2px solid #111}
+}
+
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="progress-track"><div class="progress-bar" id="progress"></div></div>
 <header>
   <div class="wrap" style="padding-top:0;padding-bottom:0">
     <span class="badge">A-Level Singapore GP • Paper 1</span>
@@ -33,12 +300,31 @@ footer{padding:35px 7vw;color:var(--muted);border-top:1px solid var(--border)}
     <p class="small">Built from the uploaded GP notes and Paper 1 model-essay patterns, cross-checked against Cambridge examiner guidance. This is a study framework, not a guarantee of a particular mark.</p>
   </div>
 </header>
-
-<nav>
-<a href="#core">Core</a><a href="#question">Question</a><a href="#plan">Planning</a><a href="#intro">Introduction</a><a href="#body">Body</a><a href="#eval">Evaluation</a><a href="#rebuttal">Rebuttal</a><a href="#conclusion">Conclusion</a><a href="#examples">Examples</a><a href="#topics">Topics</a><a href="#mistakes">Mistakes</a><a href="#exam">Exam</a>
+<div class="topbar"><button class="hamburger" aria-label="Open navigation" aria-expanded="false" type="button"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button><span class="topbar-label" id="topbarLabel">Core</span><button class="theme-toggle" aria-label="Switch between paper and lamp theme" aria-pressed="false" type="button"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.2" y1="4.2" x2="5.6" y2="5.6"/><line x1="18.4" y1="18.4" x2="19.8" y2="19.8"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.2" y1="19.8" x2="5.6" y2="18.4"/><line x1="18.4" y1="5.6" x2="19.8" y2="4.2"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg></button></div>
+<div class="layout">
+<nav class="sidenav" id="sidenav" aria-label="Playbook sections">
+<div class="sidenav-head"><span class="sidenav-eyebrow">Contents</span><button class="theme-toggle" aria-label="Switch between paper and lamp theme" aria-pressed="false" type="button"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.2" y1="4.2" x2="5.6" y2="5.6"/><line x1="18.4" y1="18.4" x2="19.8" y2="19.8"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.2" y1="19.8" x2="5.6" y2="18.4"/><line x1="18.4" y1="5.6" x2="19.8" y2="4.2"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg></button></div>
+<ul>
+<li><a href="#core"><span class="num">01</span><span class="label">Core</span></a></li>
+<li><a href="#question"><span class="num">02</span><span class="label">Question</span></a></li>
+<li><a href="#plan"><span class="num">03</span><span class="label">Planning</span></a></li>
+<li><a href="#intro"><span class="num">04</span><span class="label">Introduction</span></a></li>
+<li><a href="#body"><span class="num">05</span><span class="label">Body</span></a></li>
+<li><a href="#eval"><span class="num">06</span><span class="label">Evaluation</span></a></li>
+<li><a href="#rebuttal"><span class="num">07</span><span class="label">Rebuttal</span></a></li>
+<li><a href="#conclusion"><span class="num">08</span><span class="label">Conclusion</span></a></li>
+<li><a href="#examples"><span class="num">09</span><span class="label">Examples</span></a></li>
+<li><a href="#topics"><span class="num">10</span><span class="label">Topics</span></a></li>
+<li><a href="#mistakes"><span class="num">11</span><span class="label">Mistakes</span></a></li>
+<li><a href="#exam"><span class="num">12</span><span class="label">Exam</span></a></li>
+<li><a href="#model"><span class="num">13</span><span class="label">Model Essay</span></a></li>
+<li><a href="#school"><span class="num">14</span><span class="label">YIJC School Core</span></a></li>
+<li><a href="#ksbull"><span class="num">15</span><span class="label">KS Bull</span></a></li>
+<li><a href="#source"><span class="num">16</span><span class="label">Sources</span></a></li>
+</ul>
 </nav>
-
-<main>
+<div class="scrim" id="scrim"></div>
+<main id="main" tabindex="-1">
 <section id="core" class="wrap">
 <h2>1. What GP Paper 1 is actually testing</h2>
 <div class="callout"><strong>Core principle:</strong> GP is not an English essay competition disguised as current affairs. Knowledge supplies the material; the marks come from how intelligently you use it to answer the exact question.</div>
@@ -216,7 +502,7 @@ footer{padding:35px 7vw;color:var(--muted);border-top:1px solid var(--border)}
 </div>
 </section>
 
-<section class="wrap">
+<section id="model" class="wrap">
 <h2>13. Model Paper 1 architecture: “Assess the view that traditional media platforms are no longer relevant.”</h2>
 <div class="card">
 <p><strong>Stand:</strong> Traditional media has lost dominance, but “no longer relevant” is too absolute; its institutional credibility, agenda-setting and legitimacy remain significant, though unevenly and in adapted forms.</p>
@@ -231,16 +517,123 @@ footer{padding:35px 7vw;color:var(--muted);border-top:1px solid var(--border)}
 </div>
 </section>
 
-<section class="wrap">
-<h2>14. What high-scoring KS Bull essays teach</h2>
+
+<section id="school" class="wrap">
+<h2>14. YIJC School Core — highest-weight exam layer</h2>
+<div class="callout"><strong>Priority rule:</strong> these revision-card principles come directly from the Yishun Innova Junior College Paper 1 Revision Cards. Use this layer as the practical school framework, while Cambridge remains the authority for assessment requirements.</div>
+
+<h3>A. Question-analysis sequence</h3>
+<div class="flow"><span>KEYWORDS</span><b>→</b><span>QUESTION TYPE</span><b>→</b><span>KEYWORD FOCUS</span><b>→</b><span>PARTIES / PERSPECTIVES</span><b>→</b><span>STAND</span></div>
+<div class="grid">
+<div class="card"><h3>1 — Identify keywords</h3><ul><li>Is there more than one part?</li><li>What are the key terms?</li><li>Do not use dictionary definitions; define terms in context.</li><li>Check for a specific context such as <em>your society</em> or <em>today</em>.</li></ul></div>
+<div class="card"><h3>2 — Identify question type</h3><p><strong>Extent:</strong> judge applicability/strength/relevance.</p><p><strong>Absolute:</strong> understand why the sweeping view exists and moderate your approach.</p><p><strong>Comparison:</strong> compare consistently using a relevant criterion.</p><p><strong>Conditional:</strong> address the given condition in every paragraph.</p><p><strong>Hybrid:</strong> satisfy all requirements of the combined types.</p></div>
+<div class="card"><h3>3 — Identify keyword focus</h3><p>Impact/value, responsibility, sufficiency/effectiveness, realistic/feasible/possible, should/acceptable/justified, too much/over, relevance/significance/importance.</p></div>
+<div class="card"><h3>4 — Identify perspectives</h3><p><strong>GINCI:</strong> Government, Intergovernmental organisations, Non-governmental organisations, Corporations, Individuals.</p><p><strong>SPERM:</strong> Social, Scientific/Technological, Political, Psychological, Economic, Environmental, Educational, Ethical, Religious, Racial, Rights, Military, Moral, Media.</p><p><strong>Levels:</strong> individual → community → nation → regional → global.</p></div>
+</div>
+
+<h3>B. Keyword focus — what the keyword demands</h3>
+<table>
+<tr><th>Keyword</th><th>School-card approach</th><th>Questions to ask</th></tr>
+<tr><td><strong>Relevance</strong></td><td>Show why the context makes the subject matter important now.</td><td>What characteristics of modern society/Singapore increase or reduce its importance?</td></tr>
+<tr><td><strong>Significance / importance / harms / benefits</strong></td><td>After identifying impact, evaluate severity, scale, frequency, context or the human condition.</td><td>How serious? How widespread? How often? Why does it matter here?</td></tr>
+<tr><td><strong>Responsible</strong></td><td>Identify who contributes, causes, can solve, has the means, or has the moral duty.</td><td>Who is responsible—and by which criterion?</td></tr>
+<tr><td><strong>Sufficient / effective</strong></td><td>Assess whether it addresses urgent needs, root causes, sustainability and stakeholder breadth.</td><td>Does it solve the root problem? Is it sustainable? Who remains excluded?</td></tr>
+<tr><td><strong>Realistic / feasible / possible</strong></td><td>Identify criteria that must be met, then test whether society can meet them.</td><td>Resources? Expertise? Infrastructure? Technology? Public support? Political will? Power structures?</td></tr>
+<tr><td><strong>Should / acceptable / justified</strong></td><td>Assess consequences systematically, then examine morality: rights, duties and fairness.</td><td>Is the net effect beneficial? Is it morally permissible?</td></tr>
+<tr><td><strong>Too much / over</strong></td><td>Show harms from excess, then explain why the apparently excessive amount may still be necessary/justified.</td><td>Too much compared with what? What is the cost of reducing it?</td></tr>
+</table>
+
+<h3>C. Conceptual Understanding (CU)</h3>
+<div class="callout"><strong>CU is not just “knowing a concept”.</strong> The YIJC cards identify three levels at which CU appears: <strong>Example → Explanation → Evaluation</strong>.</div>
+<div class="grid">
+<div class="card"><strong>Trends & relationships</strong><p>Identify patterns, connections and cause/effect relationships.</p></div>
+<div class="card"><strong>Change over time</strong><p>Compare past, present and possible future where the question invites it.</p></div>
+<div class="card"><strong>Connections across contexts</strong><p>Compare countries, groups, sectors, stakeholders or domains where relevant.</p></div>
+<div class="card"><strong>Implications</strong><p>Analyse significance for individuals and society at local, regional and global levels.</p></div>
+</div>
+
+<h3>D. Topic sentence — the examiner's signpost</h3>
+<div class="card">
+<p>A strong topic sentence should:</p>
+<ol class="numbered">
+<li>Be <strong>general enough</strong> to control a paragraph rather than become an example.</li>
+<li>Contain the <strong>relevant question keywords</strong>.</li>
+<li>Reflect your <strong>chosen stand</strong>.</li>
+<li>Give a <strong>reason</strong>, not merely describe a situation.</li>
+</ol>
+<p><strong>Test:</strong> if the topic sentence cannot be debated, it is probably description rather than argument.</p>
+</div>
+
+<h3>E. School paragraph structures</h3>
+<div class="grid">
+<div class="card"><h3>Approach 1A — 3 supporting + 1/2 opposing</h3><div class="flow"><span>SV1</span><span>SV2</span><span>SV3</span><span>Transition</span><span>OV1 + rebuttal</span><span>OV2 + rebuttal</span></div><p>Best when you have three strong supporting arguments and need to demonstrate that the opposing case does not overturn your stand.</p></div>
+<div class="card"><h3>Approach 1B — 1/2 opposing + 2/3 supporting</h3><div class="flow"><span>OV + rebuttal</span><span>Transition</span><span>SV1</span><span>SV2</span><span>SV3</span></div><p>Useful when the opposing side is particularly obvious or important and should be addressed early.</p></div>
+<div class="card"><h3>Approach 2 — integrated</h3><div class="flow"><span>SV</span><span>OV</span><span>Rebuttal</span><span>SV</span><span>OV</span><span>Rebuttal</span><span>SV</span></div><p>Each major argument contains its own alternative perspective and rebuttal. Efficient, but requires strong control to avoid cramped paragraphs.</p></div>
+</div>
+
+<h3>F. Approach 1A paragraph anatomy</h3>
+<div class="flow"><span>TS</span><b>→</b><span>EX</span><b>→</b><span>EG</span><b>→</b><span>EX of EG</span><b>→</b><span>EV</span><b>→</b><span>CS</span></div>
+<table>
+<tr><th>Stage</th><th>What to do</th></tr>
+<tr><td><strong>TS</strong></td><td>State the controlling idea.</td></tr>
+<tr><td><strong>EX</strong></td><td>Elaborate the essential parts of the point.</td></tr>
+<tr><td><strong>EG</strong></td><td>Give relevant factual evidence.</td></tr>
+<tr><td><strong>EX of EG</strong></td><td>Explicitly explain how the evidence supports the point.</td></tr>
+<tr><td><strong>EV</strong></td><td>Anticipate a shortcoming without abandoning your stand.</td></tr>
+<tr><td><strong>CS</strong></td><td>Reiterate the point and link it to your opinion.</td></tr>
+</table>
+
+<h3>G. Opposing paragraph anatomy</h3>
+<div class="flow"><span>OV TS</span><b>→</b><span>EX</span><b>→</b><span>EG</span><b>→</b><span>EX</span><b>→</b><span>EV of OV</span><b>→</b><span>RS</span><b>→</b><span>CS</span></div>
+<p>The YIJC cards specifically emphasise that the counterargument should be acknowledged as potentially valid under <strong>limited circumstances</strong>, then evaluated and rebutted without compromising the overall stand.</p>
+
+<h3>H. Signalling devices</h3>
+<div class="two">
+<div class="card"><h3>Introduce OV</h3><p>“Critics of…” · “Opponents to…” · “Some would dispute this on the grounds that…” · “It might seem persuasive to argue that…” · “Whilst some may claim that…”</p></div>
+<div class="card"><h3>Rebut</h3><p>“However, I believe that it is more important to consider…” · “Despite these arguments, I still hold my position because…” · “Admittedly, there is some validity in arguing as such, but…” · “Yet…” · “Nonetheless…”</p></div>
+</div>
+
+<h3>I. Concessions — acknowledge without surrendering</h3>
+<p>Use concessionary and hedging language to show the OV has some merit, then return to your stronger position:</p>
+<div class="flow"><span>Undeniably</span><span>Granted</span><span>Admittedly</span><span>There is an element of truth</span><span>Yet</span><span>However</span><span>Nonetheless</span><span>Even so</span></div>
+<p>The key is the logic after the concession: <strong>“this is true to an extent, but the reverse ultimately holds more truth because…”</strong></p>
+
+<h3>J. Direct logical rebuttals</h3>
+<div class="grid">
+<div class="card"><h3>Gap in assumptions</h3><p>Show that the OV assumes a condition that is not actually established.</p></div>
+<div class="card"><h3>Fallacy of relevance</h3><p>Show that the OV is responding to a different problem from the one in the question.</p></div>
+<div class="card"><h3>False causation</h3><p>Show that the factor cited is not the actual cause of the outcome.</p></div>
+<div class="card"><h3>Over-generalisation</h3><p>Show that the OV treats a limited case as universally representative.</p></div>
+</div>
+<div class="callout warn"><strong>Do not straw-man.</strong> Your OV should be something a reasonable person could genuinely argue. A deliberately silly opponent makes your rebuttal less impressive.</div>
+
+<h3>K. Evaluation strategies from the school cards</h3>
+<table>
+<tr><th>Lens</th><th>How to use it</th></tr>
+<tr><td><strong>Context</strong></td><td>Compare Singapore/world; causes; consequences; degree of impact; future trends; demographic or cultural differences.</td></tr>
+<tr><td><strong>Majority vs minority</strong></td><td>Ask whether benefits to the majority justify costs imposed on a minority, or whether individual welfare is outweighed by the greater good.</td></tr>
+<tr><td><strong>Actual vs potential</strong></td><td>Separate what has actually happened from what could happen if conditions improve.</td></tr>
+<tr><td><strong>Idealistic vs pragmatic</strong></td><td>Judge the gap between what would be desirable and what institutions can realistically implement.</td></tr>
+<tr><td><strong>Long vs short term</strong></td><td>Compare immediate gains with sustainability and delayed consequences.</td></tr>
+</table>
+
+<h3>L. Perspective banks</h3>
+<p><strong>GINCI:</strong> Government · Intergovernmental organisations · Non-governmental organisations · Corporations · Individuals.</p>
+<p><strong>SPERM:</strong> Social · Scientific/Technological · Political · Psychological · Economic · Environmental · Educational · Ethical · Religious · Racial · Rights · Military · Moral · Media.</p>
+<p><strong>Levels:</strong> Individual · Community · Nation · Regional · Global.</p>
+<div class="callout">Do not use SPERM/GINCI as a checklist to cram random perspectives into an essay. Use them to discover a genuinely missing stakeholder or dimension.</div>
+</div></section>
+
+<section id="ksbull" class="wrap">
+<h2>15. What high-scoring KS Bull essays teach</h2>
 <p>The uploaded KS Bull collections explicitly separate Paper 1 model essays from Paper 2 sections. Their Paper 1 examples show recurring features: clear stands, substantial examples, developed reasoning and marker/editor comments focused on analysis, evaluation, relevance and expression. For example, the 2023 KS Bull Issue 1 contents identify Paper 1 essays on obedience, corporations, technology, work and conflict before the Paper 2 section begins. fileciteturn5file0</p>
 <p>One model essay on AI illustrates the desired pattern: it begins with a clear, qualified position and then develops a mechanism before applying concrete examples such as weather prediction, farming, Grab pricing and AlphaFold. fileciteturn5file3</p>
 <p>Another Paper 1 model on handicrafts was specifically praised for logical and eloquent development and compelling analysis, while the marker still identified a need to address the phrase “no longer” more directly. That is a crucial GP lesson: <strong>even a good essay can lose strength if it neglects the exact wording of the question.</strong> fileciteturn5file8</p>
 <p>A model on voters was praised for sound, well-detailed examples and sophisticated expression, but the marker noted that analysis and evaluation could be more consistent. This is exactly why evaluation should not be saved for the final two sentences of a paragraph. fileciteturn6file6</p>
 </section>
 
-<section class="wrap">
-<h2>15. Source discipline</h2>
+<section id="source" class="wrap">
+<h2>16. Source discipline</h2>
 <div class="card">
 <p>This playbook prioritises official Cambridge examiner guidance for claims about what examiners value. Cambridge's examiner reports repeatedly emphasise relevance, key-word focus, coherent organisation, developed examples, analysis/evaluation, academic register and a substantive conclusion. citeturn0search36turn0search37turn0search38turn0search39</p>
 <p>The Singapore A-Level listing confirms General Paper as H1 subject code 8881 for the 2026 GCE A-Level. citeturn0search1</p>
@@ -248,9 +641,95 @@ footer{padding:35px 7vw;color:var(--muted);border-top:1px solid var(--border)}
 </div>
 </section>
 </main>
+</div>
 <footer>
 <p>GP Paper 1 Master Essay Playbook • Designed for active revision, not memorisation.</p>
 <p>Core rule: <strong>Answer the exact question. Make claims. Explain mechanisms. Use evidence. Evaluate continuously. Make a judgement.</strong></p>
 </footer>
+<button class="fab-top" id="fabTop" aria-label="Back to top" type="button"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg></button>
+<script>
+(function(){
+  var root = document.documentElement;
+  function applyTheme(t){
+    if(t === 'lamp'){ root.setAttribute('data-theme','lamp'); }
+    else { root.removeAttribute('data-theme'); }
+    document.querySelectorAll('.theme-toggle').forEach(function(btn){
+      btn.setAttribute('aria-pressed', t === 'lamp' ? 'true' : 'false');
+    });
+  }
+  var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  var currentTheme = prefersDark ? 'lamp' : 'paper';
+  applyTheme(currentTheme);
+  document.querySelectorAll('.theme-toggle').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      currentTheme = currentTheme === 'lamp' ? 'paper' : 'lamp';
+      applyTheme(currentTheme);
+    });
+  });
+
+  var sidenav = document.getElementById('sidenav');
+  var scrim = document.getElementById('scrim');
+  function openNav(){
+    sidenav.classList.add('is-open'); scrim.classList.add('is-open');
+    document.querySelectorAll('.hamburger').forEach(function(b){ b.setAttribute('aria-expanded','true'); });
+  }
+  function closeNav(){
+    sidenav.classList.remove('is-open'); scrim.classList.remove('is-open');
+    document.querySelectorAll('.hamburger').forEach(function(b){ b.setAttribute('aria-expanded','false'); });
+  }
+  document.querySelectorAll('.hamburger').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if(sidenav.classList.contains('is-open')){ closeNav(); } else { openNav(); }
+    });
+  });
+  if(scrim){ scrim.addEventListener('click', closeNav); }
+  sidenav.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeNav); });
+
+  var progress = document.getElementById('progress');
+  function updateProgress(){
+    var h = document.documentElement;
+    var scrolled = h.scrollTop;
+    var height = h.scrollHeight - h.clientHeight;
+    var pct = height > 0 ? (scrolled/height)*100 : 0;
+    progress.style.width = pct + '%';
+  }
+  document.addEventListener('scroll', updateProgress, {passive:true});
+  updateProgress();
+
+  var fab = document.getElementById('fabTop');
+  function updateFab(){
+    if(window.scrollY > 480){ fab.classList.add('is-visible'); } else { fab.classList.remove('is-visible'); }
+  }
+  document.addEventListener('scroll', updateFab, {passive:true});
+  updateFab();
+  fab.addEventListener('click', function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+
+  var sections = Array.prototype.slice.call(document.querySelectorAll('main > section[id]'));
+  var navLinks = {};
+  var labelText = {};
+  document.querySelectorAll('.sidenav a[href^="#"]').forEach(function(a){
+    var id = a.getAttribute('href').slice(1);
+    navLinks[id] = a;
+    var lab = a.querySelector('.label');
+    labelText[id] = lab ? lab.textContent : a.textContent;
+  });
+  var topbarLabel = document.getElementById('topbarLabel');
+  if('IntersectionObserver' in window){
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        var id = entry.target.getAttribute('id');
+        var link = navLinks[id];
+        if(!link) return;
+        if(entry.isIntersecting){
+          Object.keys(navLinks).forEach(function(k){ navLinks[k].classList.remove('active'); });
+          link.classList.add('active');
+          if(topbarLabel){ topbarLabel.textContent = labelText[id] || ''; }
+        }
+      });
+    }, {rootMargin:'-15% 0px -70% 0px', threshold:0});
+    sections.forEach(function(s){ observer.observe(s); });
+  }
+})();
+</script>
 </body>
 </html>
