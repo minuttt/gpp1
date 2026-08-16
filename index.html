@@ -1,14 +1,15 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#F4EEDF">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="light dark" name="color-scheme"/>
+<meta content="#F4EEDF" name="theme-color"/>
 <title>GP Paper 1 — Master Essay Playbook v3 | YIJC High-Weight Revision</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Source+Sans+3:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <style>
 
 :root{
@@ -287,51 +288,248 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
   header{border-bottom:2px solid #111}
 }
 
+
+/* v6 navigation repair: persistent sidebar + usable mobile fallback */
+.gp-sidebar, aside.sidebar, aside.toc, nav.sidebar, nav.toc {
+  position: sticky;
+  top: 1.25rem;
+  align-self: flex-start;
+  max-height: calc(100vh - 2.5rem);
+  overflow-y: auto;
+  z-index: 20;
+}
+.toc-list {
+  margin: 0;
+  padding-left: 1.35rem;
+}
+.toc-list li { margin: .18rem 0; }
+.toc-list a {
+  display: block;
+  text-decoration: none;
+}
+@media (min-width: 900px) {
+  .layout, .page-layout, .content-layout, .main-layout {
+    align-items: flex-start;
+  }
+  .gp-sidebar, aside.sidebar, aside.toc, nav.sidebar, nav.toc {
+    position: sticky;
+    top: 1rem;
+  }
+}
+@media (max-width: 899px) {
+  .gp-sidebar, aside.sidebar, aside.toc, nav.sidebar, nav.toc {
+    position: static;
+    max-height: none;
+    overflow: visible;
+  }
+}
+/* Keep anchor targets visible below sticky headers. */
+section[id] { scroll-margin-top: 1.5rem; }
+
+
+/* v7: preserve the original UI's sidenav and keep it visible while reading. */
+.layout{align-items:flex-start;}
+.sidenav{
+  position:sticky !important;
+  top:0 !important;
+  height:100vh !important;
+  max-height:100vh;
+  overflow-y:auto !important;
+  align-self:flex-start;
+  z-index:40;
+}
+.sidenav ul{overflow:visible;}
+section[id]{scroll-margin-top:20px;}
+@media (max-width: 899px){
+  .sidenav{position:fixed !important;}
+}
+
+/* v8: truly persistent desktop sidebar */
+@media (min-width: 960px){
+  .layout{display:block !important;position:relative !important;}
+  .sidenav{
+    position:fixed !important;
+    left:0 !important;
+    top:0 !important;
+    width:var(--sidebar-w) !important;
+    height:100vh !important;
+    max-height:100vh !important;
+    overflow-y:auto !important;
+    z-index:100 !important;
+  }
+  .layout > main{
+    margin-left:var(--sidebar-w) !important;
+    min-width:0;
+  }
+}
+@media (max-width:959px){
+  .sidenav{
+    position:fixed !important;
+    top:0 !important;
+    left:0 !important;
+    height:100vh !important;
+    max-height:100vh !important;
+    overflow-y:auto !important;
+    z-index:100 !important;
+  }
+}
+
+
+
+/* v10 — exact original section flow: notebook / solid / notebook / solid */
+main>section:nth-child(odd){
+  background-image:repeating-linear-gradient(to bottom,transparent 0 34px,var(--rule) 34px 35px);
+}
+main>section:nth-child(even){
+  background:var(--paper-sunken);
+}
+main>section::before{
+  content:counter(sect,decimal-leading-zero);
+  position:absolute;
+  top:6px;
+  right:clamp(10px,2.5vw,28px);
+  font-family:var(--font-display);
+  font-weight:300;
+  font-size:clamp(3.2rem,6.4vw,5.6rem);
+  color:var(--ink);
+  opacity:.06;
+  z-index:-1;
+  line-height:1;
+  letter-spacing:-.03em;
+  pointer-events:none;
+  user-select:none;
+}
+
+/* Keep the real sidebar fixed independently of the article. */
+@media (min-width:960px){
+  .layout{display:block !important;position:relative !important;}
+  .sidenav{
+    position:fixed !important;
+    left:0 !important;
+    top:0 !important;
+    width:var(--sidebar-w) !important;
+    height:100vh !important;
+    max-height:100vh !important;
+    overflow-y:auto !important;
+    z-index:40 !important;
+  }
+  main{
+    margin-left:var(--sidebar-w) !important;
+    min-width:0 !important;
+  }
+}
+
+
+/* ================================================================
+   v11 — EXPLICIT ORIGINAL TWO-THEME FLOW
+   Odd numbered sections: ruled notebook paper.
+   Even numbered sections: sunken paper.
+   Both use the same large top-right section number.
+   This is the same visual grammar used by Sections 01–14.
+   ================================================================ */
+
+main > section.theme-notebook {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--paper) !important;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0 34px,
+    var(--rule) 34px 35px
+  ) !important;
+}
+
+main > section.theme-sunken {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--paper-sunken) !important;
+  background-image: none !important;
+}
+
+main > section.theme-notebook::before,
+main > section.theme-sunken::before {
+  content: counter(sect, decimal-leading-zero) !important;
+  position: absolute !important;
+  top: 6px !important;
+  right: clamp(10px, 2.5vw, 28px) !important;
+  font-family: var(--font-display) !important;
+  font-weight: 300 !important;
+  font-size: clamp(3.2rem, 6.4vw, 5.6rem) !important;
+  color: var(--ink) !important;
+  opacity: .06 !important;
+  z-index: -1 !important;
+  line-height: 1 !important;
+  letter-spacing: -.03em !important;
+  pointer-events: none !important;
+  user-select: none !important;
+}
+
+/* The later sections use the exact same content container and
+   component geometry as the earlier sections. */
+main > section.theme-notebook > .wrap,
+main > section.theme-sunken > .wrap {
+  max-width: 1120px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+main > section.theme-notebook .card,
+main > section.theme-sunken .card {
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  box-shadow: 0 1px 2px var(--shadow);
+}
+
+main > section.theme-notebook .callout,
+main > section.theme-sunken .callout {
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--mark-red);
+  border-radius: var(--radius);
+}
+
+/* Section 24 had source-import cards with an alien class name.
+   They now look exactly like the native .card component. */
+main > section.theme-notebook .source-discussion-card,
+main > section.theme-sunken .source-discussion-card {
+  background: var(--paper-raised) !important;
+  border: 1px solid var(--rule) !important;
+  border-radius: var(--radius) !important;
+  padding: 22px 24px !important;
+  box-shadow: 0 1px 2px var(--shadow) !important;
+  margin: 16px 0 !important;
+}
+
+/* Ensure the section rhythm itself is continuous from 01 to 24. */
+main > section.theme-notebook + section.theme-sunken,
+main > section.theme-sunken + section.theme-notebook {
+  border-top: 1px solid var(--rule);
+}
+
 </style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="progress-track"><div class="progress-bar" id="progress"></div></div>
 <header>
-  <div class="wrap" style="padding-top:0;padding-bottom:0">
-    <span class="badge">A-Level Singapore GP • Paper 1</span>
-    <h1>Master Essay Playbook</h1>
-    <p style="font-size:1.2rem;max-width:850px">A practical system for decoding the question, building defensible arguments, using examples properly, evaluating throughout, rebutting intelligently, and ending with a genuine judgement.</p>
-    <p class="small">Built from the uploaded GP notes and Paper 1 model-essay patterns, cross-checked against Cambridge examiner guidance. This is a study framework, not a guarantee of a particular mark.</p>
-  </div>
+<div class="wrap" style="padding-top:0;padding-bottom:0">
+<span class="badge">A-Level Singapore GP • Paper 1</span>
+<h1>Master Essay Playbook</h1>
+<p style="font-size:1.2rem;max-width:850px">A practical system for decoding the question, building defensible arguments, using examples properly, evaluating throughout, rebutting intelligently, and ending with a genuine judgement.</p>
+<p class="small">Built from the uploaded GP notes and Paper 1 model-essay patterns, cross-checked against Cambridge examiner guidance. This is a study framework, not a guarantee of a particular mark.</p>
+</div>
 </header>
-<div class="topbar"><button class="hamburger" aria-label="Open navigation" aria-expanded="false" type="button"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button><span class="topbar-label" id="topbarLabel">Core</span><button class="theme-toggle" aria-label="Switch between paper and lamp theme" aria-pressed="false" type="button"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.2" y1="4.2" x2="5.6" y2="5.6"/><line x1="18.4" y1="18.4" x2="19.8" y2="19.8"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.2" y1="19.8" x2="5.6" y2="18.4"/><line x1="18.4" y1="5.6" x2="19.8" y2="4.2"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg></button></div>
+<div class="topbar"><button aria-expanded="false" aria-label="Open navigation" class="hamburger" type="button"><svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-width="2" viewbox="0 0 24 24" width="20"><line x1="3" x2="21" y1="6" y2="6"></line><line x1="3" x2="21" y1="12" y2="12"></line><line x1="3" x2="21" y1="18" y2="18"></line></svg></button><span class="topbar-label" id="topbarLabel">Core</span><button aria-label="Switch between paper and lamp theme" aria-pressed="false" class="theme-toggle" type="button"><svg class="icon-sun" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-width="2" viewbox="0 0 24 24" width="18"><circle cx="12" cy="12" r="4"></circle><line x1="12" x2="12" y1="2" y2="4"></line><line x1="12" x2="12" y1="20" y2="22"></line><line x1="4.2" x2="5.6" y1="4.2" y2="5.6"></line><line x1="18.4" x2="19.8" y1="18.4" y2="19.8"></line><line x1="2" x2="4" y1="12" y2="12"></line><line x1="20" x2="22" y1="12" y2="12"></line><line x1="4.2" x2="5.6" y1="19.8" y2="18.4"></line><line x1="18.4" x2="19.8" y1="5.6" y2="4.2"></line></svg><svg class="icon-moon" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"></path></svg></button></div>
 <div class="layout">
-<nav class="sidenav" id="sidenav" aria-label="Playbook sections">
-<div class="sidenav-head"><span class="sidenav-eyebrow">Contents</span><button class="theme-toggle" aria-label="Switch between paper and lamp theme" aria-pressed="false" type="button"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.2" y1="4.2" x2="5.6" y2="5.6"/><line x1="18.4" y1="18.4" x2="19.8" y2="19.8"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.2" y1="19.8" x2="5.6" y2="18.4"/><line x1="18.4" y1="5.6" x2="19.8" y2="4.2"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg></button></div>
-<ul>
-<li><a href="#core"><span class="num">01</span><span class="label">Core</span></a></li>
-<li><a href="#question"><span class="num">02</span><span class="label">Question</span></a></li>
-<li><a href="#plan"><span class="num">03</span><span class="label">Planning</span></a></li>
-<li><a href="#intro"><span class="num">04</span><span class="label">Introduction</span></a></li>
-<li><a href="#body"><span class="num">05</span><span class="label">Body</span></a></li>
-<li><a href="#eval"><span class="num">06</span><span class="label">Evaluation</span></a></li>
-<li><a href="#rebuttal"><span class="num">07</span><span class="label">Rebuttal</span></a></li>
-<li><a href="#conclusion"><span class="num">08</span><span class="label">Conclusion</span></a></li>
-<li><a href="#examples"><span class="num">09</span><span class="label">Examples</span></a></li>
-<li><a href="#topics"><span class="num">10</span><span class="label">Topics</span></a></li>
-<li><a href="#mistakes"><span class="num">11</span><span class="label">Mistakes</span></a></li>
-<li><a href="#exam"><span class="num">12</span><span class="label">Exam</span></a></li>
-<li><a href="#model"><span class="num">13</span><span class="label">Model Essay</span></a></li>
-<li><a href="#school"><span class="num">14</span><span class="label">YIJC School Core</span></a></li>
-<li><a href="#thinking">High-Band Thinking</a>
-<a href="#judgement">Judgement</a>
-<a href="#examples2">Reusable Example Bank</a>
-<a href="#example-map">Example Map</a>
-<a href="#common-errors">Failure Detector</a>
-<a href="#practice">Training System</a>
-<a href="#ksbull"><span class="num">15</span><span class="label">KS Bull</span></a></li>
-<li><a href="#source"><span class="num">16</span><span class="label">Sources</span></a></li>
-</ul>
+<nav aria-label="Playbook sections" class="sidenav" id="sidenav">
+<div class="sidenav-head"><span class="sidenav-eyebrow">Contents</span><button aria-label="Switch between paper and lamp theme" aria-pressed="false" class="theme-toggle" type="button"><svg class="icon-sun" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-width="2" viewbox="0 0 24 24" width="18"><circle cx="12" cy="12" r="4"></circle><line x1="12" x2="12" y1="2" y2="4"></line><line x1="12" x2="12" y1="20" y2="22"></line><line x1="4.2" x2="5.6" y1="4.2" y2="5.6"></line><line x1="18.4" x2="19.8" y1="18.4" y2="19.8"></line><line x1="2" x2="4" y1="12" y2="12"></line><line x1="20" x2="22" y1="12" y2="12"></line><line x1="4.2" x2="5.6" y1="19.8" y2="18.4"></line><line x1="18.4" x2="19.8" y1="5.6" y2="4.2"></line></svg><svg class="icon-moon" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"></path></svg></button></div>
+<ul><li><a href="#core"><span class="num">01</span><span>1. What GP Paper 1 is actually testing</span></a></li><li><a href="#question"><span class="num">02</span><span>2. Decode the question before brainstorming</span></a></li><li><a href="#plan"><span class="num">03</span><span>3. The 3–5 minute plan</span></a></li><li><a href="#intro"><span class="num">04</span><span>4. Introduction: establish the debate, not a history lesson</span></a></li><li><a href="#body"><span class="num">05</span><span>5. The body paragraph: PEEL is not enough</span></a></li><li><a href="#eval"><span class="num">06</span><span>6. The difference between analysis and evaluation</span></a></li><li><a href="#rebuttal"><span class="num">07</span><span>7. Opposing arguments and rebuttal</span></a></li><li><a href="#conclusion"><span class="num">08</span><span>8. Conclusion: synthesis, not summary</span></a></li><li><a href="#examples"><span class="num">09</span><span>9. Examples: build a flexible bank</span></a></li><li><a href="#topics"><span class="num">10</span><span>10. Core topic frameworks</span></a></li><li><a href="#mistakes"><span class="num">11</span><span>11. Why essays get stuck around the middle bands</span></a></li><li><a href="#exam"><span class="num">12</span><span>12. Exam-room checklist</span></a></li><li><a href="#model"><span class="num">13</span><span>13. Model Paper 1 architecture: “Assess the view that traditional media platforms are no longer relevant.”</span></a></li><li><a href="#school"><span class="num">14</span><span>14. YIJC School Core — highest-weight exam layer</span></a></li><li><a href="#thinking"><span class="num">15</span><span>15. The High-Band Thinking Engine</span></a></li><li><a href="#paragraph-logic"><span class="num">16</span><span>16. Paragraph Logic: Evaluation Is Not Contradiction</span></a></li><li><a href="#judgement"><span class="num">17</span><span>17. Judgement: the skill that turns balance into an answer</span></a></li><li><a href="#examples2"><span class="num">18</span><span>18. The Reusable Example Bank</span></a></li><li><a href="#example-map"><span class="num">19</span><span>19. Example-to-Topic Map</span></a></li><li><a href="#common-errors"><span class="num">20</span><span>20. High-Band Failure Detector</span></a></li><li><a href="#practice"><span class="num">21</span><span>21. Training System: Turn the Notes into Skill</span></a></li><li><a href="#ksbull"><span class="num">22</span><span>22. What high-scoring KS Bull essays teach</span></a></li><li><a href="#source"><span class="num">23</span><span>23. Source discipline</span></a></li><li><a href="#discussion-masterclass"><span class="num">24</span><span>24. Full Discussion Masterclass — Evaluation, SV, OV &amp; Rebuttal</span></a></li></ul>
 </nav>
 <div class="scrim" id="scrim"></div>
 <main id="main" tabindex="-1">
-<section id="core" class="wrap">
+<section class="wrap theme-notebook" id="core">
 <h2>1. What GP Paper 1 is actually testing</h2>
 <div class="callout"><strong>Core principle:</strong> GP is not an English essay competition disguised as current affairs. Knowledge supplies the material; the marks come from how intelligently you use it to answer the exact question.</div>
 <div class="grid">
@@ -344,20 +542,18 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
 <strong>Cambridge examiner pattern:</strong> official examiner reports repeatedly emphasise focused introductions, sustained attention to the key words, coherent organisation, relevant examples, analysis and evaluation throughout, and conclusions that do more than repeat the essay. citeturn0search36turn0search37turn0search38turn0search39
 </div>
 </section>
-
-<section id="question" class="wrap">
+<section class="wrap theme-sunken" id="question">
 <h2>2. Decode the question before brainstorming</h2>
 <div class="flow"><span>Topic</span><b>→</b><span>Scope</span><b>→</b><span>Command</span><b>→</b><span>Keyword</span><b>→</b><span>Judgement</span></div>
 <div class="grid">
 <div class="card"><h3>Scope</h3><ul><li>your society?</li><li>today?</li><li>developing countries?</li><li>all people?</li><li>the modern world?</li></ul></div>
 <div class="card"><h3>Dominant keywords</h3><p>Words such as <strong>only, always, no longer, realistic, necessary, harmful, effective, relevant, should, more than, entirely</strong> determine the burden of proof.</p></div>
-<div class="card"><h3>Command words</h3><p><strong>Discuss / Comment:</strong> examine competing views.<br><strong>How far / To what extent:</strong> make a degree-of-agreement judgement.<br><strong>Is it true / Is this fair:</strong> test the accuracy of the proposition.<br><strong>Assess:</strong> weigh relative strength.</p></div>
+<div class="card"><h3>Command words</h3><p><strong>Discuss / Comment:</strong> examine competing views.<br/><strong>How far / To what extent:</strong> make a degree-of-agreement judgement.<br/><strong>Is it true / Is this fair:</strong> test the accuracy of the proposition.<br/><strong>Assess:</strong> weigh relative strength.</p></div>
 </div>
 <div class="callout warn"><strong>Never ignore absolutes.</strong> “No longer”, “only”, “all”, “always”, “completely”, “never” are not decoration. A strong essay tests whether the absolute wording survives exceptions, context and counter-cases.</div>
 <h3>Useful pre-writing paraphrase</h3><p>Rewrite the question in one plain sentence. If you cannot explain what the examiner is asking in ordinary language, do not start the essay.</p>
 </section>
-
-<section id="plan" class="wrap">
+<section class="wrap theme-notebook" id="plan">
 <h2>3. The 3–5 minute plan</h2>
 <div class="card">
 <h3>Step 1 — Stand</h3><p>Choose the position you can defend best, not the one that sounds most sophisticated.</p>
@@ -370,8 +566,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
 <div class="flow"><span>Introduction</span><b>→</b><span>OV1 + rebuttal</span><b>→</b><span>OV2 + rebuttal</span><b>→</b><span>SV1</span><b>→</b><span>SV2</span><b>→</b><span>SV3</span><b>→</b><span>Conclusion</span></div>
 <p class="small">This is a useful template, not a rigid Cambridge requirement. Opposing views can appear later, and paragraph count is not itself a marking criterion.</p>
 </section>
-
-<section id="intro" class="wrap">
+<section class="wrap theme-sunken" id="intro">
 <h2>4. Introduction: establish the debate, not a history lesson</h2>
 <div class="card">
 <h3>Reliable formula</h3>
@@ -382,23 +577,21 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
 </div>
 <div class="callout"><strong>Do not list your body points mechanically.</strong> Cambridge specifically warns against introductions that become descriptive or tangential, and recent examiner guidance says to keep them focused rather than listing arguments. citeturn0search38turn0search37</div>
 </section>
-
-<section id="body" class="wrap">
+<section class="wrap theme-notebook" id="body">
 <h2>5. The body paragraph: PEEL is not enough</h2>
 <p>A high-level GP paragraph is better understood as:</p>
-<div class="flow"><span><strong>P</strong> Point</span><span><strong>M</strong> Mechanism</span><span><strong>E</strong> Example</span><span><strong>A</strong> Analysis</span><span><strong>E</strong> Evaluation</span><span><strong>L</strong> Link/Judgement</span></div>
+<div class="flow"><span><strong>P</strong> Point</span><span><strong>E</strong> Example</span><span><strong>M</strong> Mechanism</span><span><strong>A</strong> Analysis</span><span><strong>E</strong> Evaluation</span><span><strong>L</strong> Judgement/Link</span></div>
 <div class="grid">
-<div class="card"><h3>Point</h3><p>Make a claim that directly answers the question.</p></div>
-<div class="card"><h3>Mechanism</h3><p>Show the causal chain. <strong>Why does this point produce the outcome?</strong></p></div>
-<div class="card"><h3>Example</h3><p>Give a specific, accurate case. Avoid dumping several unrelated examples.</p></div>
+<div class="card"><h3>Point</h3><p>Make a clear, debatable claim that directly answers the question.</p></div>
+<div class="card"><h3>Example</h3><p>Give a specific, accurate and apt case. The example comes <strong>before</strong> the mechanism because you will explain how this particular case demonstrates your claim.</p></div>
+<div class="card"><h3>Mechanism</h3><p>Show the causal or institutional chain. <strong>How and why does this example produce the effect you are claiming?</strong></p></div>
 <div class="card"><h3>Analysis</h3><p>Explain what the example demonstrates about the broader issue.</p></div>
 <div class="card"><h3>Evaluation</h3><p>Test the strength: scale, duration, stakeholders, context, alternatives, unintended effects, reversibility and trade-offs.</p></div>
 <div class="card"><h3>Link</h3><p>Return to the question's keyword and state why the argument matters to the overall judgement.</p></div>
 </div>
 <div class="callout"><strong>Example ≠ analysis.</strong> “Singapore introduced X” is description. “This matters because X changes the incentive structure faced by…” is analysis. “However, its effectiveness is limited because…” is evaluation.</div>
 </section>
-
-<section id="eval" class="wrap">
+<section class="wrap theme-sunken" id="eval">
 <h2>6. The difference between analysis and evaluation</h2>
 <table><tr><th>Level</th><th>What it sounds like</th><th>What it does</th></tr>
 <tr><td>Description</td><td>“The government introduced…”</td><td>States what happened.</td></tr>
@@ -420,8 +613,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
 </div>
 <p class="quote">The strongest evaluation does not merely say “there are limitations”. It identifies the limitation and explains why it changes the answer.</p>
 </section>
-
-<section id="rebuttal" class="wrap">
+<section class="wrap theme-notebook" id="rebuttal">
 <h2>7. Opposing arguments and rebuttal</h2>
 <div class="card">
 <h3>First: build a real opposing argument</h3><p>Represent the strongest plausible case against your stand. A weak opposing view makes the essay look rehearsed.</p>
@@ -436,22 +628,20 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
 </div>
 <div class="callout"><strong>Critical warning:</strong> Do not use “some exceptions exist” to rebut an absolute claim you have agreed with. If one genuine exception exists, the absolute claim is already weakened. Either qualify your stand or show why the alleged exception does not actually count.</div>
 </section>
-
-<section id="conclusion" class="wrap">
+<section class="wrap theme-sunken" id="conclusion">
 <h2>8. Conclusion: synthesis, not summary</h2>
 <div class="flow"><span>Answer the question</span><b>→</b><span>Weigh arguments</span><b>→</b><span>Return to keyword</span><b>→</b><span>Final insight</span></div>
 <p>A weak ending repeats three topic sentences. A stronger conclusion explains <strong>why the balance of arguments produces the judgement</strong>.</p>
 <div class="card">
 <h3>High-level ending</h3>
-<p>1. Restate the nuanced stand.<br>
-2. Identify which side is ultimately stronger and why.<br>
-3. Address the key qualifier in the question.<br>
+<p>1. Restate the nuanced stand.<br/>
+2. Identify which side is ultimately stronger and why.<br/>
+3. Address the key qualifier in the question.<br/>
 4. End with a broader implication or return to the opening uncertainty.</p>
 </div>
 <p>Cambridge examiner guidance explicitly values conclusions that evaluate and synthesise rather than merely repeat points; earlier examiner guidance also notes that linking the conclusion back to the introduction can create a sense of planning and sustained clarity. citeturn0search37turn0search39</p>
 </section>
-
-<section id="examples" class="wrap">
+<section class="wrap theme-notebook" id="examples">
 <h2>9. Examples: build a flexible bank</h2>
 <div class="callout"><strong>Do not memorise essays. Memorise what examples prove.</strong> A strong example bank records: <strong>what happened → why it matters → what it supports → limitation/counterpoint.</strong></div>
 <div class="grid">
@@ -463,11 +653,10 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
 <h3>Example test</h3>
 <ol><li>Can I name the actors?</li><li>Can I explain what actually happened?</li><li>Can I connect it to my point?</li><li>Can I say what it does <em>not</em> prove?</li></ol>
 </section>
-
-<section id="topics" class="wrap">
+<section class="wrap theme-sunken" id="topics">
 <h2>10. Core topic frameworks</h2>
 <div class="grid">
-<div class="card"><h3>Politics / Global Affairs</h3><p><strong>Power:</strong> hard vs soft power, legitimacy, sovereignty, deterrence.<br><strong>Systems:</strong> democracy, populism, institutions.<br><strong>Global:</strong> nationalism vs globalism, interdependence, diplomacy, intervention vs sovereignty.</p></div>
+<div class="card"><h3>Politics / Global Affairs</h3><p><strong>Power:</strong> hard vs soft power, legitimacy, sovereignty, deterrence.<br/><strong>Systems:</strong> democracy, populism, institutions.<br/><strong>Global:</strong> nationalism vs globalism, interdependence, diplomacy, intervention vs sovereignty.</p></div>
 <div class="card"><h3>Media</h3><p>Credibility, gatekeeping, agenda-setting, misinformation, business models, censorship, freedom of expression, algorithms, citizen journalism, concentration of ownership.</p></div>
 <div class="card"><h3>Environment</h3><p>Growth vs sustainability, collective action, externalities, individual vs systemic responsibility, developed vs developing states, incentives, enforcement, long-term costs.</p></div>
 <div class="card"><h3>Arts / Culture</h3><p>Identity, heritage, criticism of society, creativity, emotional experience, education, tourism/revenue, accessibility, commercialisation.</p></div>
@@ -477,8 +666,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
 <div class="card"><h3>Society / Equality</h3><p>Equality vs equity, law vs culture, representation, structural barriers, individual responsibility, intersection of class, gender, age and opportunity.</p></div>
 </div>
 </section>
-
-<section id="mistakes" class="wrap">
+<section class="wrap theme-notebook" id="mistakes">
 <h2>11. Why essays get stuck around the middle bands</h2>
 <table><tr><th>Problem</th><th>Fix</th></tr>
 <tr><td>Answers the topic, not the question</td><td>Repeat the dominant keyword mentally at every paragraph.</td></tr>
@@ -493,8 +681,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
 <tr><td>Overconfident facts</td><td>Use fewer, stronger, accurately understood examples.</td></tr>
 </table>
 </section>
-
-<section id="exam" class="wrap">
+<section class="wrap theme-sunken" id="exam">
 <h2>12. Exam-room checklist</h2>
 <div class="grid">
 <div class="card"><h3>Before writing</h3><ul><li>Have I decoded the exact question?</li><li>What is the dominant keyword?</li><li>What is my stand?</li><li>What are my 3 strongest arguments?</li><li>What is the strongest OV?</li><li>Does my OV need rebuttal?</li></ul></div>
@@ -502,13 +689,12 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
 <div class="card"><h3>Final check</h3><ul><li>Have I addressed every key word?</li><li>Is the conclusion a judgement?</li><li>Any factual overclaims?</li><li>Grammar, tense, agreement, punctuation?</li><li>Any repeated phrases or examples?</li><li>Is the handwriting legible?</li></ul></div>
 </div>
 <div class="callout">
-<strong>The single best mental loop:</strong><br>
+<strong>The single best mental loop:</strong><br/>
 <code>POINT → WHY? → EXAMPLE → SO WHAT? → HOW FAR? → THEREFORE?</code>
 <p>Run this loop repeatedly. It forces the essay away from description and towards analysis, evaluation and judgement.</p>
 </div>
 </section>
-
-<section id="model" class="wrap">
+<section class="wrap theme-notebook" id="model">
 <h2>13. Model Paper 1 architecture: “Assess the view that traditional media platforms are no longer relevant.”</h2>
 <div class="card">
 <p><strong>Stand:</strong> Traditional media has lost dominance, but “no longer relevant” is too absolute; its institutional credibility, agenda-setting and legitimacy remain significant, though unevenly and in adapted forms.</p>
@@ -522,12 +708,9 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
 <h3>Conclusion</h3><p>Do not say simply “traditional media is important”. The stronger judgement is that <strong>relevance has shifted from monopoly over speed and distribution toward authority, verification and institutional legitimacy</strong>.</p>
 </div>
 </section>
-
-
-<section id="school" class="wrap">
+<section class="wrap theme-sunken" id="school">
 <h2>14. YIJC School Core — highest-weight exam layer</h2>
 <div class="callout"><strong>Priority rule:</strong> these revision-card principles come directly from the Yishun Innova Junior College Paper 1 Revision Cards. Use this layer as the practical school framework, while Cambridge remains the authority for assessment requirements.</div>
-
 <h3>A. Question-analysis sequence</h3>
 <div class="flow"><span>KEYWORDS</span><b>→</b><span>QUESTION TYPE</span><b>→</b><span>KEYWORD FOCUS</span><b>→</b><span>PARTIES / PERSPECTIVES</span><b>→</b><span>STAND</span></div>
 <div class="grid">
@@ -536,7 +719,6 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
 <div class="card"><h3>3 — Identify keyword focus</h3><p>Impact/value, responsibility, sufficiency/effectiveness, realistic/feasible/possible, should/acceptable/justified, too much/over, relevance/significance/importance.</p></div>
 <div class="card"><h3>4 — Identify perspectives</h3><p><strong>GINCI:</strong> Government, Intergovernmental organisations, Non-governmental organisations, Corporations, Individuals.</p><p><strong>SPERM:</strong> Social, Scientific/Technological, Political, Psychological, Economic, Environmental, Educational, Ethical, Religious, Racial, Rights, Military, Moral, Media.</p><p><strong>Levels:</strong> individual → community → nation → regional → global.</p></div>
 </div>
-
 <h3>B. Keyword focus — what the keyword demands</h3>
 <table>
 <tr><th>Keyword</th><th>School-card approach</th><th>Questions to ask</th></tr>
@@ -548,16 +730,14 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
 <tr><td><strong>Should / acceptable / justified</strong></td><td>Assess consequences systematically, then examine morality: rights, duties and fairness.</td><td>Is the net effect beneficial? Is it morally permissible?</td></tr>
 <tr><td><strong>Too much / over</strong></td><td>Show harms from excess, then explain why the apparently excessive amount may still be necessary/justified.</td><td>Too much compared with what? What is the cost of reducing it?</td></tr>
 </table>
-
 <h3>C. Conceptual Understanding (CU)</h3>
 <div class="callout"><strong>CU is not just “knowing a concept”.</strong> The YIJC cards identify three levels at which CU appears: <strong>Example → Explanation → Evaluation</strong>.</div>
 <div class="grid">
-<div class="card"><strong>Trends & relationships</strong><p>Identify patterns, connections and cause/effect relationships.</p></div>
+<div class="card"><strong>Trends &amp; relationships</strong><p>Identify patterns, connections and cause/effect relationships.</p></div>
 <div class="card"><strong>Change over time</strong><p>Compare past, present and possible future where the question invites it.</p></div>
 <div class="card"><strong>Connections across contexts</strong><p>Compare countries, groups, sectors, stakeholders or domains where relevant.</p></div>
 <div class="card"><strong>Implications</strong><p>Analyse significance for individuals and society at local, regional and global levels.</p></div>
 </div>
-
 <h3>D. Topic sentence — the examiner's signpost</h3>
 <div class="card">
 <p>A strong topic sentence should:</p>
@@ -569,14 +749,12 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
 </ol>
 <p><strong>Test:</strong> if the topic sentence cannot be debated, it is probably description rather than argument.</p>
 </div>
-
 <h3>E. School paragraph structures</h3>
 <div class="grid">
 <div class="card"><h3>Approach 1A — 3 supporting + 1/2 opposing</h3><div class="flow"><span>SV1</span><span>SV2</span><span>SV3</span><span>Transition</span><span>OV1 + rebuttal</span><span>OV2 + rebuttal</span></div><p>Best when you have three strong supporting arguments and need to demonstrate that the opposing case does not overturn your stand.</p></div>
 <div class="card"><h3>Approach 1B — 1/2 opposing + 2/3 supporting</h3><div class="flow"><span>OV + rebuttal</span><span>Transition</span><span>SV1</span><span>SV2</span><span>SV3</span></div><p>Useful when the opposing side is particularly obvious or important and should be addressed early.</p></div>
 <div class="card"><h3>Approach 2 — integrated</h3><div class="flow"><span>SV</span><span>OV</span><span>Rebuttal</span><span>SV</span><span>OV</span><span>Rebuttal</span><span>SV</span></div><p>Each major argument contains its own alternative perspective and rebuttal. Efficient, but requires strong control to avoid cramped paragraphs.</p></div>
 </div>
-
 <h3>F. Approach 1A paragraph anatomy</h3>
 <div class="flow"><span>TS</span><b>→</b><span>EX</span><b>→</b><span>EG</span><b>→</b><span>EX of EG</span><b>→</b><span>EV</span><b>→</b><span>CS</span></div>
 <table>
@@ -588,22 +766,18 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
 <tr><td><strong>EV</strong></td><td>Anticipate a shortcoming without abandoning your stand.</td></tr>
 <tr><td><strong>CS</strong></td><td>Reiterate the point and link it to your opinion.</td></tr>
 </table>
-
 <h3>G. Opposing paragraph anatomy</h3>
 <div class="flow"><span>OV TS</span><b>→</b><span>EX</span><b>→</b><span>EG</span><b>→</b><span>EX</span><b>→</b><span>EV of OV</span><b>→</b><span>RS</span><b>→</b><span>CS</span></div>
 <p>The YIJC cards specifically emphasise that the counterargument should be acknowledged as potentially valid under <strong>limited circumstances</strong>, then evaluated and rebutted without compromising the overall stand.</p>
-
 <h3>H. Signalling devices</h3>
 <div class="two">
 <div class="card"><h3>Introduce OV</h3><p>“Critics of…” · “Opponents to…” · “Some would dispute this on the grounds that…” · “It might seem persuasive to argue that…” · “Whilst some may claim that…”</p></div>
 <div class="card"><h3>Rebut</h3><p>“However, I believe that it is more important to consider…” · “Despite these arguments, I still hold my position because…” · “Admittedly, there is some validity in arguing as such, but…” · “Yet…” · “Nonetheless…”</p></div>
 </div>
-
 <h3>I. Concessions — acknowledge without surrendering</h3>
 <p>Use concessionary and hedging language to show the OV has some merit, then return to your stronger position:</p>
 <div class="flow"><span>Undeniably</span><span>Granted</span><span>Admittedly</span><span>There is an element of truth</span><span>Yet</span><span>However</span><span>Nonetheless</span><span>Even so</span></div>
 <p>The key is the logic after the concession: <strong>“this is true to an extent, but the reverse ultimately holds more truth because…”</strong></p>
-
 <h3>J. Direct logical rebuttals</h3>
 <div class="grid">
 <div class="card"><h3>Gap in assumptions</h3><p>Show that the OV assumes a condition that is not actually established.</p></div>
@@ -612,7 +786,6 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
 <div class="card"><h3>Over-generalisation</h3><p>Show that the OV treats a limited case as universally representative.</p></div>
 </div>
 <div class="callout warn"><strong>Do not straw-man.</strong> Your OV should be something a reasonable person could genuinely argue. A deliberately silly opponent makes your rebuttal less impressive.</div>
-
 <h3>K. Evaluation strategies from the school cards</h3>
 <table>
 <tr><th>Lens</th><th>How to use it</th></tr>
@@ -622,33 +795,27 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
 <tr><td><strong>Idealistic vs pragmatic</strong></td><td>Judge the gap between what would be desirable and what institutions can realistically implement.</td></tr>
 <tr><td><strong>Long vs short term</strong></td><td>Compare immediate gains with sustainability and delayed consequences.</td></tr>
 </table>
-
 <h3>L. Perspective banks</h3>
 <p><strong>GINCI:</strong> Government · Intergovernmental organisations · Non-governmental organisations · Corporations · Individuals.</p>
 <p><strong>SPERM:</strong> Social · Scientific/Technological · Political · Psychological · Economic · Environmental · Educational · Ethical · Religious · Racial · Rights · Military · Moral · Media.</p>
 <p><strong>Levels:</strong> Individual · Community · Nation · Regional · Global.</p>
 <div class="callout">Do not use SPERM/GINCI as a checklist to cram random perspectives into an essay. Use them to discover a genuinely missing stakeholder or dimension.</div>
-</div></section>
-
-
-<section id="thinking" class="wrap">
-<h2>14. The High-Band Thinking Engine</h2>
+</section><section class="wrap theme-notebook" id="thinking">
+<h2>15. The High-Band Thinking Engine</h2>
 <div class="callout"><strong>The goal is not to sound sophisticated. It is to think precisely.</strong> A high-scoring paragraph does more than state a point and provide an example. It identifies a mechanism, tests the assumptions behind it, weighs its importance against alternatives, and returns to the exact wording of the question.</div>
-
 <h3>The 10-question engine</h3>
 <div class="grid">
-<div class="card"><strong>1. Claim</strong><br>What exactly am I arguing?</div>
-<div class="card"><strong>2. Mechanism</strong><br>Why would this produce the claimed outcome?</div>
-<div class="card"><strong>3. Evidence</strong><br>What specific, accurate example demonstrates it?</div>
-<div class="card"><strong>4. Analysis</strong><br>What does the evidence reveal about the broader issue?</div>
-<div class="card"><strong>5. Significance</strong><br>Why does this matter to society, rather than merely happen?</div>
-<div class="card"><strong>6. Conditions</strong><br>When is the argument strongest or weakest?</div>
-<div class="card"><strong>7. Assumption</strong><br>What must be true for my reasoning to work?</div>
-<div class="card"><strong>8. Counter-case</strong><br>What could a reasonable critic say?</div>
-<div class="card"><strong>9. Weigh</strong><br>Does that criticism overturn, limit, or merely qualify my claim?</div>
-<div class="card"><strong>10. Judgement</strong><br>What does this imply about the question overall?</div>
+<div class="card"><strong>1. Claim</strong><br/>What exactly am I arguing?</div>
+<div class="card"><strong>2. Mechanism</strong><br/>Why would this produce the claimed outcome?</div>
+<div class="card"><strong>3. Evidence</strong><br/>What specific, accurate example demonstrates it?</div>
+<div class="card"><strong>4. Analysis</strong><br/>What does the evidence reveal about the broader issue?</div>
+<div class="card"><strong>5. Significance</strong><br/>Why does this matter to society, rather than merely happen?</div>
+<div class="card"><strong>6. Conditions</strong><br/>When is the argument strongest or weakest?</div>
+<div class="card"><strong>7. Assumption</strong><br/>What must be true for my reasoning to work?</div>
+<div class="card"><strong>8. Counter-case</strong><br/>What could a reasonable critic say?</div>
+<div class="card"><strong>9. Weigh</strong><br/>Does that criticism overturn, limit, or merely qualify my claim?</div>
+<div class="card"><strong>10. Judgement</strong><br/>What does this imply about the question overall?</div>
 </div>
-
 <h3>From competent to high-band analysis</h3>
 <table>
 <tr><th>Level</th><th>Example</th><th>What is missing / achieved</th></tr>
@@ -658,31 +825,85 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
 <tr><td>Evaluation</td><td>“Yet this measures distributional influence rather than the ability to produce reliable information; a story encountered on TikTok may still originate from a professional newsroom.”</td><td>Tests the assumption and limits the claim.</td></tr>
 <tr><td>Judgement</td><td>“Thus, digital platforms have weakened traditional media's monopoly over attention, but not necessarily its relevance as a producer of verified information.”</td><td>Weighs the evidence against the exact question.</td></tr>
 </table>
-
 <div class="callout"><strong>High-band habit:</strong> whenever you write “therefore”, ask yourself whether you have actually shown the causal bridge. Whenever you write “however”, ask what precisely changes the strength of the preceding argument.</div>
-
 <h3>Mechanism chains</h3>
 <p>Do not jump from <strong>X happened</strong> straight to <strong>therefore society is better/worse</strong>. Build the bridge:</p>
 <div class="flow"><span>Cause</span><b>→</b><span>Mechanism</span><b>→</b><span>Behaviour / institutional change</span><b>→</b><span>Consequence</span><b>→</b><span>Significance</span></div>
 <p><strong>Example:</strong> Algorithmic recommendation → personalised exposure → repeated exposure to similar content → narrower information diets → greater risk of polarisation. Evaluation then asks whether this effect is widespread, whether users can diversify their sources, and whether the platform is the dominant cause.</p>
-
 <h3>Interrogate the hidden assumption</h3>
 <div class="grid">
-<div class="card"><strong>Popularity ≠ relevance</strong><br>A declining audience may not mean declining structural influence.</div>
-<div class="card"><strong>Correlation ≠ causation</strong><br>Two trends occurring together do not establish that one caused the other.</div>
-<div class="card"><strong>Access ≠ impact</strong><br>Making something available does not prove that people use it or benefit from it.</div>
-<div class="card"><strong>Short-term ≠ long-term</strong><br>An immediate gain may create delayed costs or prove unsustainable.</div>
-<div class="card"><strong>One group ≠ society</strong><br>Effects can vary sharply by age, income, geography, culture or institutions.</div>
-<div class="card"><strong>Possibility ≠ probability</strong><br>A technology or policy being capable of an outcome does not mean it will produce it at scale.</div>
-<div class="card"><strong>Formal equality ≠ substantive equality</strong><br>The same rule can produce unequal outcomes where starting conditions differ.</div>
-<div class="card"><strong>Innovation ≠ social progress</strong><br>A new capability may be commercially or technically successful without improving welfare.</div>
+<div class="card"><strong>Popularity ≠ relevance</strong><br/>A declining audience may not mean declining structural influence.</div>
+<div class="card"><strong>Correlation ≠ causation</strong><br/>Two trends occurring together do not establish that one caused the other.</div>
+<div class="card"><strong>Access ≠ impact</strong><br/>Making something available does not prove that people use it or benefit from it.</div>
+<div class="card"><strong>Short-term ≠ long-term</strong><br/>An immediate gain may create delayed costs or prove unsustainable.</div>
+<div class="card"><strong>One group ≠ society</strong><br/>Effects can vary sharply by age, income, geography, culture or institutions.</div>
+<div class="card"><strong>Possibility ≠ probability</strong><br/>A technology or policy being capable of an outcome does not mean it will produce it at scale.</div>
+<div class="card"><strong>Formal equality ≠ substantive equality</strong><br/>The same rule can produce unequal outcomes where starting conditions differ.</div>
+<div class="card"><strong>Innovation ≠ social progress</strong><br/>A new capability may be commercially or technically successful without improving welfare.</div>
 </div>
-</section>
-
-<section id="judgement" class="wrap">
-<h2>15. Judgement: the skill that turns balance into an answer</h2>
+</section><section class="wrap theme-sunken" id="paragraph-logic">
+<h2>16. Paragraph Logic: Evaluation Is Not Contradiction</h2>
+<div class="callout"><strong>Core rule:</strong> Evaluation does <em>not</em> automatically mean contradicting your own point. Evaluation means testing the <strong>strength, extent, significance, conditions and limitations</strong> of the claim you have just established.</div>
+<h3>The corrected Body Paragraph sequence</h3>
+<div class="flow"><span>POINT / CLAIM</span><b>→</b><span>APT EXAMPLE</span><b>→</b><span>MECHANISM / PURPOSE</span><b>→</b><span>ANALYSIS</span><b>→</b><span>EVALUATION</span><b>→</b><span>JUDGEMENT / LINK</span></div>
+<p><strong>Why example before mechanism?</strong> The example gives the paragraph a concrete case to work with. You then explain <em>how and why that example demonstrates the claim</em>. This prevents the paragraph from becoming a sequence of abstract assertions followed by a loosely attached example.</p>
+<table>
+<tr><th>Stage</th><th>Question to ask</th><th>Purpose</th></tr>
+<tr><td><strong>Point</strong></td><td>What am I arguing?</td><td>Make a clear, debatable claim directly answering the question.</td></tr>
+<tr><td><strong>Example</strong></td><td>What real-world case demonstrates this?</td><td>Ground the claim in specific, relevant evidence.</td></tr>
+<tr><td><strong>Mechanism</strong></td><td>How / why does this example produce the claimed effect?</td><td>Explain the causal or institutional link rather than merely naming the example.</td></tr>
+<tr><td><strong>Analysis</strong></td><td>So what does this reveal?</td><td>Move from the case to its broader consequence and significance.</td></tr>
+<tr><td><strong>Evaluation</strong></td><td>How strong, widespread, deep, sustainable or conditional is this?</td><td>Interrogate the claim rather than assuming the example proves everything.</td></tr>
+<tr><td><strong>Judgement / Link</strong></td><td>What does my evaluation mean for the exact question?</td><td>Resolve the paragraph and return explicitly to the question.</td></tr>
+</table>
+<h3>Evaluation can do four different things</h3>
+<div class="grid">
+<div class="card"><strong>1. Strengthen</strong><br/>Show that the argument is even more significant than first suggested.</div>
+<div class="card"><strong>2. Limit</strong><br/>Show that the argument is valid but less extensive or powerful than it first appears.</div>
+<div class="card"><strong>3. Contextualise</strong><br/>Show that the argument is stronger for some groups, countries, circumstances or time periods than others.</div>
+<div class="card"><strong>4. Compare</strong><br/>Show that the point matters, but another factor may be more decisive.</div>
+</div>
+<div class="callout"><strong>Therefore:</strong> Evaluation may support your paragraph, qualify it, or weaken part of it. There is no rule that evaluation must contradict the point.</div>
+<h3>SV does not mean “everything in the paragraph must support it without qualification”</h3>
+<p>Suppose your <strong>Supporting View (SV)</strong> is:</p>
+<div class="card"><strong>“Traditional media remains relevant because established institutions continue to provide credible, verified information.”</strong></div>
+<p>You can then evaluate it:</p>
+<div class="card"><strong>“However, continued use does not necessarily indicate continued dominance. Younger audiences may encounter reporting from established outlets through social-media platforms rather than directly engaging with the original institution, while short-form content can reduce sustained engagement with detailed reporting.”</strong></div>
+<p>This does <strong>not</strong> automatically turn the paragraph into an Opposing View. You have not rejected the SV. You have refined its <strong>extent</strong>.</p>
+<div class="flow"><span>Traditional media remains relevant</span><b>→</b><span>but not equally dominant</span><b>→</b><span>its relevance is concentrated in credibility / knowledge production</span></div>
+<h3>The key mental model</h3>
+<div class="card">
+<p><strong>Do not think:</strong> Point → prove point → contradict point → defend point.</p>
+<p><strong>Think:</strong> Claim → establish → interrogate → weigh → judge.</p>
+</div>
+<h3>Evaluation vs Opposing View vs Rebuttal</h3>
+<table>
+<tr><th>Technique</th><th>Core question</th><th>Example</th></tr>
+<tr><td><strong>Evaluation</strong></td><td>How strong is <em>my argument</em>?</td><td>“Continued use does not necessarily mean continued dominance.”</td></tr>
+<tr><td><strong>Opposing View (OV)</strong></td><td>What would a reasonable person who disagrees say?</td><td>“Digital platforms increasingly dominate everyday information consumption because they offer greater speed and personalisation.”</td></tr>
+<tr><td><strong>Rebuttal</strong></td><td>Why is that opposing argument limited or ultimately less convincing?</td><td>“Yet this confuses control over distribution with control over knowledge production, since much digital discussion still depends on reporting produced by established institutions.”</td></tr>
+</table>
+<div class="callout"><strong>Important:</strong> You do not need to force an OV and rebuttal into every SV paragraph. A strong SV paragraph can simply <strong>establish → evaluate → judge → link</strong>. Save a full OV/rebuttal structure for when you deliberately introduce the opposing case.</div>
+<h3>Worked example: Traditional media</h3>
+<div class="card">
+<p><strong>POINT:</strong> Traditional media remains relevant because its institutional credibility makes it an important source of verified information.</p>
+<p><strong>EXAMPLE:</strong> During major crises, established broadcasters and newspapers continue to provide audiences with professionally verified updates.</p>
+<p><strong>MECHANISM:</strong> Their editorial gatekeeping and professional accountability reduce the likelihood that unverified claims are presented as established fact.</p>
+<p><strong>ANALYSIS:</strong> This gives traditional media an important role when the consequences of misinformation are particularly serious, allowing it to retain influence even when digital platforms dominate everyday information consumption.</p>
+<p><strong>EVALUATION:</strong> Nevertheless, continued reliance should not be equated with continued dominance. Younger audiences may encounter reporting from established outlets through social-media platforms rather than directly engaging with the original institution, while short-form content can reduce sustained engagement with detailed reporting. Traditional media therefore retains credibility without necessarily retaining the same depth of audience attention it once commanded.</p>
+<p><strong>JUDGEMENT / LINK:</strong> Thus, the decline of sustained engagement weakens traditional media's former monopoly over attention, but does not eliminate its relevance as a trusted producer of information.</p>
+</div>
+<h3>How to know whether your evaluation is useful</h3>
+<div class="grid">
+<div class="card"><strong>Useful evaluation</strong><br/>“This weakens the claim because the evidence demonstrates exposure, not sustained engagement.”</div>
+<div class="card"><strong>Weak evaluation</strong><br/>“However, there are also disadvantages.”</div>
+<div class="card"><strong>Useful evaluation</strong><br/>“This effect is strongest among younger, highly connected audiences, but less applicable to older populations.”</div>
+<div class="card"><strong>Weak evaluation</strong><br/>“However, this is not always the case.”</div>
+</div>
+<div class="callout warn"><strong>Final test:</strong> After your evaluation, ask: <em>“What does this make me believe about the question now?”</em> Your next sentence should answer that. That sentence is your paragraph-level judgement/link.</div>
+</section><section class="wrap theme-notebook" id="judgement">
+<h2>17. Judgement: the skill that turns balance into an answer</h2>
 <div class="callout"><strong>Balance is not the same as indecision.</strong> A strong GP essay can acknowledge serious objections while still reaching a clear, defensible conclusion.</div>
-
 <h3>Build judgement using criteria</h3>
 <p>Instead of asking only “Which side has more points?”, ask <strong>what criterion determines the answer?</strong></p>
 <table>
@@ -698,30 +919,23 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
 <tr><td>Trade-offs</td><td>Does solving one problem create another?</td></tr>
 <tr><td>Feasibility</td><td>Can the proposed response actually be implemented?</td></tr>
 </table>
-
 <h3>Judgement formula</h3>
 <div class="card">
 <p><strong>Although X is significant because A, Y is ultimately more convincing because B, particularly where C. Therefore, the statement is true to the extent that D, but not where E.</strong></p>
 </div>
-
 <h3>Three levels of conclusion</h3>
 <div class="grid">
 <div class="card"><strong>Weak:</strong> “Overall, there are advantages and disadvantages, but I disagree.”</div>
 <div class="card"><strong>Good:</strong> “Overall, I disagree because the benefits outweigh the drawbacks.”</div>
 <div class="card"><strong>High-band:</strong> “The claim is persuasive when relevance is defined as mass attention, since digital platforms now dominate distribution; however, it becomes much less convincing when relevance is measured by verified knowledge production and institutional legitimacy. The stronger judgement is therefore that traditional media has lost monopoly, not relevance.”</div>
 </div>
-
 <h3>Do not confuse qualification with fence-sitting</h3>
 <p>“It depends” is not a judgement unless you specify <strong>what it depends on</strong>. A qualified stand should identify the condition that changes the answer.</p>
-</section>
-
-<section id="examples2" class="wrap">
-<h2>16. The Reusable Example Bank</h2>
+</section><section class="wrap theme-sunken" id="examples2">
+<h2>18. The Reusable Example Bank</h2>
 <div class="callout"><strong>Memorise cases, not essays.</strong> The best example is not the most obscure one. It is a well-understood case that can be adapted to several common question families without distorting what actually happened.</div>
-
 <h3>How to learn every example</h3>
 <div class="flow"><span>Case</span><b>→</b><span>Facts</span><b>→</b><span>Mechanism</span><b>→</b><span>Uses</span><b>→</b><span>Limitation</span><b>→</b><span>Counter-use</span></div>
-
 <div class="card">
 <h3>1. Singapore's carbon tax</h3>
 <p><strong>Core:</strong> Singapore introduced a carbon tax on large emitters in 2019, with the rate scheduled to rise substantially during the 2020s.</p>
@@ -729,7 +943,6 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
 <p><strong>Mechanism:</strong> Pricing carbon creates an economic incentive to reduce emissions and invest in lower-carbon processes rather than relying only on voluntary behaviour.</p>
 <p><strong>Evaluation:</strong> A price signal may be less effective where firms can pass costs to consumers, where cleaner alternatives are unavailable, or where Singapore's emissions are small relative to global emissions.</p>
 </div>
-
 <div class="card">
 <h3>2. Singapore's water strategy / NEWater</h3>
 <p><strong>Core:</strong> Singapore developed a diversified water strategy including water reclamation, desalination, local catchment water and imported water.</p>
@@ -737,7 +950,6 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
 <p><strong>Mechanism:</strong> Technological investment reduces dependence on a single vulnerable resource source and converts a physical constraint into a managed systems problem.</p>
 <p><strong>Evaluation:</strong> Technology is not a substitute for governance and long-term investment; it also requires substantial infrastructure and public trust.</p>
 </div>
-
 <div class="card">
 <h3>3. Singapore's public transport and congestion pricing</h3>
 <p><strong>Core:</strong> Singapore has used extensive public transport investment alongside road-pricing mechanisms to manage congestion.</p>
@@ -745,7 +957,6 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
 <p><strong>Mechanism:</strong> Pricing changes incentives while infrastructure provides a viable alternative, making behavioural change more feasible than relying on appeals alone.</p>
 <p><strong>Evaluation:</strong> Measures work partly because of Singapore's administrative capacity, density and infrastructure; they cannot automatically be transplanted elsewhere.</p>
 </div>
-
 <div class="card">
 <h3>4. Singapore's SkillsFuture</h3>
 <p><strong>Core:</strong> Singapore invests in continuing education and skills development to support workforce adaptation.</p>
@@ -753,7 +964,6 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
 <p><strong>Mechanism:</strong> Public support can reduce the individual cost of retraining and help workers respond to technological and economic change.</p>
 <p><strong>Evaluation:</strong> Training alone cannot guarantee employment if suitable jobs are absent or if workers face deeper structural barriers.</p>
 </div>
-
 <div class="card">
 <h3>5. Generative AI and professional knowledge work</h3>
 <p><strong>Core:</strong> Generative AI can rapidly produce text, code, images and summaries, while raising concerns about hallucination, bias, copyright, employment and over-reliance.</p>
@@ -761,7 +971,6 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
 <p><strong>Mechanism:</strong> Automation reduces the cost and time of producing certain forms of cognitive output, potentially increasing productivity while changing the value of human skills.</p>
 <p><strong>Evaluation:</strong> Productivity gains depend on verification, task suitability and access; AI capability does not mean autonomous reliability.</p>
 </div>
-
 <div class="card">
 <h3>6. AlphaFold</h3>
 <p><strong>Core:</strong> DeepMind's AlphaFold demonstrated powerful AI-assisted prediction of protein structures and has become an important research tool.</p>
@@ -769,7 +978,6 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
 <p><strong>Mechanism:</strong> Computational prediction can accelerate a previously difficult scientific task, allowing researchers to spend more time on downstream investigation.</p>
 <p><strong>Evaluation:</strong> Prediction is not equivalent to full scientific understanding or a guaranteed medical treatment; human experimentation and validation remain necessary.</p>
 </div>
-
 <div class="card">
 <h3>7. Social media and misinformation</h3>
 <p><strong>Core:</strong> Platforms such as Facebook, TikTok and X allow information to spread at extraordinary speed, while algorithmic amplification and low barriers to publication can also facilitate misinformation.</p>
@@ -777,7 +985,6 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
 <p><strong>Mechanism:</strong> Recommendation systems and engagement incentives can reward content that attracts attention, regardless of whether it is accurate.</p>
 <p><strong>Evaluation:</strong> The technology itself is not automatically the cause; user behaviour, platform design, media literacy and institutional trust also shape outcomes.</p>
 </div>
-
 <div class="card">
 <h3>8. Traditional investigative journalism</h3>
 <p><strong>Core:</strong> Established news organisations continue to conduct costly investigative reporting that may then be redistributed through digital platforms.</p>
@@ -785,7 +992,6 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
 <p><strong>Mechanism:</strong> Professional reporting can create verified information that other platforms then amplify, separating distributional power from knowledge-production power.</p>
 <p><strong>Evaluation:</strong> Legacy institutions themselves can suffer bias, concentration of ownership and financial pressure; institutional status is not proof of perfect accuracy.</p>
 </div>
-
 <div class="card">
 <h3>9. COVID-19 vaccination and public-health communication</h3>
 <p><strong>Core:</strong> The pandemic demonstrated both the importance of scientific expertise and the difficulty of maintaining public trust amid uncertainty and misinformation.</p>
@@ -793,7 +999,6 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
 <p><strong>Mechanism:</strong> Public-health measures depend not only on technical capability but on communication, institutional trust and collective compliance.</p>
 <p><strong>Evaluation:</strong> Scientific evidence can evolve; overconfidence or poor communication can weaken trust, showing why credibility must include transparency about uncertainty.</p>
 </div>
-
 <div class="card">
 <h3>10. Paris Agreement</h3>
 <p><strong>Core:</strong> The Paris Agreement provides a framework for countries to submit climate commitments and strengthen ambition over time.</p>
@@ -801,7 +1006,6 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
 <p><strong>Mechanism:</strong> International coordination can establish shared goals and expectations for a collective-action problem that no country can solve alone.</p>
 <p><strong>Evaluation:</strong> International commitments depend heavily on domestic implementation and political will; agreement does not automatically produce compliance.</p>
 </div>
-
 <div class="card">
 <h3>11. Russia's invasion of Ukraine</h3>
 <p><strong>Core:</strong> The war demonstrates the continuing importance of military power, alliances, sanctions, diplomacy, information warfare and national resilience.</p>
@@ -809,7 +1013,6 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
 <p><strong>Mechanism:</strong> Military capability shapes immediate security realities, while economic and diplomatic tools affect the longer-term costs and international legitimacy of action.</p>
 <p><strong>Evaluation:</strong> No single form of power explains outcomes; military strength, alliances, economic capacity, domestic resilience and international support interact.</p>
 </div>
-
 <div class="card">
 <h3>12. EU regulation of large technology companies</h3>
 <p><strong>Core:</strong> The European Union has pursued major digital regulation, including competition and platform rules intended to constrain the market power of large technology firms.</p>
@@ -817,7 +1020,6 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
 <p><strong>Mechanism:</strong> Regulation can alter incentives and restrict practices that markets may not correct quickly because dominant platforms possess substantial network effects.</p>
 <p><strong>Evaluation:</strong> Regulation can also increase compliance costs or reduce flexibility, so effectiveness depends on enforcement and whether rules target genuine market failures.</p>
 </div>
-
 <div class="card">
 <h3>13. Gig-economy platforms</h3>
 <p><strong>Core:</strong> Companies such as Uber and food-delivery platforms create flexible earning opportunities while raising concerns over income security, benefits and worker classification.</p>
@@ -825,7 +1027,6 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
 <p><strong>Mechanism:</strong> Digital platforms lower matching costs between customers and workers, but can shift commercial risk towards workers.</p>
 <p><strong>Evaluation:</strong> Effects vary by worker preference and labour-market context; flexibility itself can be valuable, but flexibility without adequate protection can become insecurity.</p>
 </div>
-
 <div class="card">
 <h3>14. Public arts funding and cultural institutions</h3>
 <p><strong>Core:</strong> Governments commonly support museums, heritage institutions and the arts because their benefits may extend beyond direct ticket revenue.</p>
@@ -833,7 +1034,6 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
 <p><strong>Mechanism:</strong> Public funding can preserve cultural goods that markets may underprovide because their social and educational value is not fully captured by private revenue.</p>
 <p><strong>Evaluation:</strong> Funding still requires accountability: popularity, accessibility, educational value and opportunity cost should be considered.</p>
 </div>
-
 <div class="card">
 <h3>15. Women's participation and representation</h3>
 <p><strong>Core:</strong> Women's participation in education, employment and public life has expanded substantially in many societies, while disparities remain across sectors and countries.</p>
@@ -841,7 +1041,6 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
 <p><strong>Mechanism:</strong> Legal reform can remove formal barriers, while education, social norms, childcare and workplace structures affect whether formal equality becomes substantive equality.</p>
 <p><strong>Evaluation:</strong> Progress is uneven; improvements in one dimension do not prove that all structural inequalities have disappeared.</p>
 </div>
-
 <div class="card">
 <h3>16. The space industry and commercial spaceflight</h3>
 <p><strong>Core:</strong> Private companies have expanded commercial participation in launch services, satellites and spaceflight.</p>
@@ -849,10 +1048,8 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
 <p><strong>Mechanism:</strong> Commercial incentives can mobilise private capital and competition, potentially accelerating innovation.</p>
 <p><strong>Evaluation:</strong> Commercial success does not automatically establish social value; opportunity cost, public subsidy, environmental effects and unequal access remain relevant.</p>
 </div>
-</section>
-
-<section id="example-map" class="wrap">
-<h2>17. Example-to-Topic Map</h2>
+</section><section class="wrap theme-notebook" id="example-map">
+<h2>19. Example-to-Topic Map</h2>
 <div class="callout"><strong>Do not memorise all 16 equally.</strong> Build a core set first. The aim is maximum coverage with minimum memorisation.</div>
 <table>
 <tr><th>Topic family</th><th>High-utility examples</th></tr>
@@ -867,20 +1064,17 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
 <tr><td>Equality / Society</td><td>Women's participation · gig economy · access to technology · public education and skills</td></tr>
 <tr><td>Government intervention</td><td>Carbon tax · congestion pricing · SkillsFuture · EU regulation · water strategy</td></tr>
 </table>
-
 <h3>The five-example core</h3>
 <p>If time is limited, master these deeply rather than memorising dozens superficially:</p>
 <div class="grid">
-<div class="card"><strong>Singapore carbon tax</strong><br>Environment + government + corporations + incentives + feasibility.</div>
-<div class="card"><strong>Generative AI</strong><br>Technology + work + education + media + ethics.</div>
-<div class="card"><strong>Social-media misinformation</strong><br>Media + democracy + technology + trust + regulation.</div>
-<div class="card"><strong>Russia–Ukraine</strong><br>Power + conflict + diplomacy + sanctions + security.</div>
-<div class="card"><strong>SkillsFuture</strong><br>Education + work + automation + government + inequality.</div>
+<div class="card"><strong>Singapore carbon tax</strong><br/>Environment + government + corporations + incentives + feasibility.</div>
+<div class="card"><strong>Generative AI</strong><br/>Technology + work + education + media + ethics.</div>
+<div class="card"><strong>Social-media misinformation</strong><br/>Media + democracy + technology + trust + regulation.</div>
+<div class="card"><strong>Russia–Ukraine</strong><br/>Power + conflict + diplomacy + sanctions + security.</div>
+<div class="card"><strong>SkillsFuture</strong><br/>Education + work + automation + government + inequality.</div>
 </div>
-</section>
-
-<section id="common-errors" class="wrap">
-<h2>18. High-Band Failure Detector</h2>
+</section><section class="wrap theme-sunken" id="common-errors">
+<h2>20. High-Band Failure Detector</h2>
 <table>
 <tr><th>If you wrote...</th><th>Ask...</th></tr>
 <tr><td>“This shows that…”</td><td>What exactly does it show, and why?</td></tr>
@@ -894,63 +1088,65 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
 <tr><td>“The government should…”</td><td>Is it realistic, enforceable, affordable and proportionate?</td></tr>
 <tr><td>“I agree to some extent.”</td><td>What determines the extent?</td></tr>
 </table>
-
 <div class="callout warn"><strong>Red flag:</strong> if a paragraph could be copied into five different essay questions without changing its logic, it is probably too generic. Adapt the argument to the question's exact keyword and demand.</div>
-</section>
-
-<section id="practice" class="wrap">
-<h2>19. Training System: Turn the Notes into Skill</h2>
+</section><section class="wrap theme-notebook" id="practice">
+<h2>21. Training System: Turn the Notes into Skill</h2>
 <h3>Stage 1 — Question drills</h3>
 <p>Take a question and spend 5 minutes only on: keyword, question type, scope, parties/perspectives, criteria and stand. Do not write the essay.</p>
-
 <h3>Stage 2 — Argument drills</h3>
 <p>Generate three supporting arguments and at least two serious opposing arguments. For each, write the mechanism and the strongest evaluation in one or two sentences.</p>
-
 <h3>Stage 3 — Example drills</h3>
 <p>Take one example and force yourself to use it for two different questions. If the application requires changing the facts rather than changing the framing, the example is not genuinely flexible.</p>
-
 <h3>Stage 4 — Paragraph drills</h3>
 <p>Write one paragraph in full. Then underline: <strong>claim</strong>, <strong>mechanism</strong>, <strong>evidence</strong>, <strong>analysis</strong>, <strong>evaluation</strong>, <strong>link/judgement</strong>. Missing one reveals the weakness.</p>
-
 <h3>Stage 5 — Timed essays</h3>
 <p>Practise under actual time pressure. After writing, do not merely ask “What mark did I get?” Diagnose:</p>
 <div class="grid">
-<div class="card"><strong>Question control</strong><br>Did every paragraph answer the exact question?</div>
-<div class="card"><strong>Argument quality</strong><br>Were claims debatable and consequential?</div>
-<div class="card"><strong>Development</strong><br>Did mechanisms connect claims to outcomes?</div>
-<div class="card"><strong>Evidence</strong><br>Were examples specific and accurate?</div>
-<div class="card"><strong>Evaluation</strong><br>Did limitations actually change the strength of the argument?</div>
-<div class="card"><strong>Balance</strong><br>Was the opposing case serious rather than a straw man?</div>
-<div class="card"><strong>Judgement</strong><br>Did the conclusion explain what determines the answer?</div>
-<div class="card"><strong>Expression</strong><br>Was the prose precise without sacrificing clarity?</div>
+<div class="card"><strong>Question control</strong><br/>Did every paragraph answer the exact question?</div>
+<div class="card"><strong>Argument quality</strong><br/>Were claims debatable and consequential?</div>
+<div class="card"><strong>Development</strong><br/>Did mechanisms connect claims to outcomes?</div>
+<div class="card"><strong>Evidence</strong><br/>Were examples specific and accurate?</div>
+<div class="card"><strong>Evaluation</strong><br/>Did limitations actually change the strength of the argument?</div>
+<div class="card"><strong>Balance</strong><br/>Was the opposing case serious rather than a straw man?</div>
+<div class="card"><strong>Judgement</strong><br/>Did the conclusion explain what determines the answer?</div>
+<div class="card"><strong>Expression</strong><br/>Was the prose precise without sacrificing clarity?</div>
 </div>
-
 <div class="callout"><strong>Feedback loop:</strong> Identify the single biggest recurring weakness → rewrite one paragraph fixing only that weakness → write the next essay with that weakness as a deliberate target. Improvement comes from correcting patterns, not merely producing more essays.</div>
-</section>
-
-<section id="ksbull" class="wrap">
-<h2>15. What high-scoring KS Bull essays teach</h2>
+</section><section class="wrap theme-sunken" id="ksbull"><h2>22. What high-scoring KS Bull essays teach</h2>
+<div class="card">
 <p>The uploaded KS Bull collections explicitly separate Paper 1 model essays from Paper 2 sections. Their Paper 1 examples show recurring features: clear stands, substantial examples, developed reasoning and marker/editor comments focused on analysis, evaluation, relevance and expression. For example, the 2023 KS Bull Issue 1 contents identify Paper 1 essays on obedience, corporations, technology, work and conflict before the Paper 2 section begins. fileciteturn5file0</p>
 <p>One model essay on AI illustrates the desired pattern: it begins with a clear, qualified position and then develops a mechanism before applying concrete examples such as weather prediction, farming, Grab pricing and AlphaFold. fileciteturn5file3</p>
 <p>Another Paper 1 model on handicrafts was specifically praised for logical and eloquent development and compelling analysis, while the marker still identified a need to address the phrase “no longer” more directly. That is a crucial GP lesson: <strong>even a good essay can lose strength if it neglects the exact wording of the question.</strong> fileciteturn5file8</p>
 <p>A model on voters was praised for sound, well-detailed examples and sophisticated expression, but the marker noted that analysis and evaluation could be more consistent. This is exactly why evaluation should not be saved for the final two sentences of a paragraph. fileciteturn6file6</p>
-</section>
-
-<section id="source" class="wrap">
-<h2>21. Source discipline</h2>
+</div></section><section class="wrap theme-notebook" id="source">
+<h2>23. Source discipline</h2>
 <div class="card">
 <p>This playbook prioritises official Cambridge examiner guidance for claims about what examiners value. Cambridge's examiner reports repeatedly emphasise relevance, key-word focus, coherent organisation, developed examples, analysis/evaluation, academic register and a substantive conclusion. citeturn0search36turn0search37turn0search38turn0search39</p>
 <p>The Singapore A-Level listing confirms General Paper as H1 subject code 8881 for the 2026 GCE A-Level. citeturn0search1</p>
 <p>The uploaded Aalden Tnay notes are useful for practical structures, rebuttal logic and example banks, but they explicitly describe the edition as potentially outdated; therefore, the framework here treats those techniques as study guidance and cross-checks the core principles against current Cambridge examiner reports. fileciteturn6file0</p>
 </div>
-</section>
-</main>
-</div>
+</section><section class="wrap theme-sunken" id="discussion-masterclass">
+<h2>24. Full Discussion Masterclass — Evaluation, SV, OV &amp; Rebuttal</h2>
+<div class="callout"><strong>Source-derived addendum:</strong> This section preserves the full GP reasoning discussion supplied in the attached notes, organised into study subsections so that none of the useful explanation is lost.</div>
+<div class="card source-discussion-card"><h3>Yes — and this is a <strong>very important distinction</strong>. Your confusion is actually about what “evaluation” is supposed to <em>do</em> to a paragraph.</h3><p>The short answer is:</p><blockquote><strong>Evaluation does NOT automatically mean contradicting your point.</strong></blockquote><blockquote>Evaluation means <strong>testing the strength, significance, scope, or limits of your point</strong>.</blockquote><blockquote>Sometimes that strengthens your point. Sometimes it weakens it. Often, the strongest GP paragraphs do <strong>both</strong> and then make a judgement about the extent.</blockquote><p>Your <strong>link should then resolve that evaluation back to the question</strong>. It does not necessarily need to “rebut” your evaluation.</p><p>Let's build this properly.</p><hr/></div><div class="card source-discussion-card"><h3>1. The best possible GP Paper 1 introduction</h3><p>For most questions, I would use:</p><h4><strong>CONTEXT → DEFINE → QUESTION DEMAND → CRITERIA → STAND</strong></h4><p>Not necessarily five separate sentences. It should feel like one coherent argument.</p><h4>① Context</h4><p>Briefly establish the broader development surrounding the issue.</p><p>Don't start with:</p><blockquote>“Since the dawn of civilisation…”</blockquote><p>Don't give a history lecture.</p><p>Instead, establish <strong>why the question is being asked now</strong>.</p><h4>② Define the key term</h4><p>Define the <strong>contested keyword</strong>, not every word.</p><p>For example:</p><blockquote>“Traditional media” refers not merely to newspapers and television, but to established media institutions characterised by professional editorial standards, gatekeeping and institutional accountability.</blockquote><p>This is particularly useful when the question contains an ambiguous concept.</p><h4>③ Clarify the question's actual demand</h4><p>This is extremely important.</p><p>If the question says:</p><blockquote>“Traditional media platforms are no longer relevant.”</blockquote><p>You need to recognise that <strong>“no longer relevant” is an absolute claim</strong>.</p><p>The question isn't asking:</p><blockquote>“Is traditional media declining?”</blockquote><p>It's asking:</p><blockquote><strong>Has traditional media ceased to possess meaningful influence/value?</strong></blockquote><p>That distinction controls the whole essay.</p><h4>④ Establish your criteria</h4><p>This is the sophisticated part.</p><p>Tell the examiner <strong>how you are going to judge the question</strong>.</p><p>For example:</p><blockquote>Relevance should therefore be assessed not merely by audience size or speed of dissemination, but by an institution's capacity to shape public discourse, produce reliable information and command societal trust.</blockquote><p>Now you've created the measuring stick for your essay.</p><h4>⑤ Stand</h4><p>Finally:</p><blockquote>While traditional media has lost much of its former dominance over attention and distribution, it remains relevant through credibility, agenda-setting and institutional legitimacy.</blockquote><p>That's your <strong>continuum stand</strong>.</p><p>Not:</p><blockquote>“I agree to some extent.”</blockquote><p>Instead, you're saying <strong>exactly what extent and why</strong>.</p><hr/></div><div class="card source-discussion-card"><h3>2. Model introduction</h3><p>For:</p><blockquote><strong>Assess the view that traditional media platforms are no longer relevant.</strong></blockquote><p>I'd write:</p><blockquote>The rapid rise of digital platforms has transformed how information is produced, distributed and consumed, with algorithm-driven social media increasingly displacing traditional media as the primary gateway through which many audiences encounter news. Traditional media, however, refers not merely to physical formats such as newspapers, television and radio, but to established media institutions characterised by professional editorial standards, gatekeeping and institutional accountability. To claim that such platforms are “no longer relevant” is therefore to argue that they have ceased to exercise meaningful influence over public discourse, rather than merely lost their former dominance. Relevance should consequently be assessed not only through audience reach and speed, but also through credibility, agenda-setting capacity and institutional legitimacy. While traditional media has undeniably lost its monopoly over attention and information distribution, it remains structurally relevant through its capacity to produce verified knowledge and shape public debate; the claim is therefore persuasive only if relevance is narrowly equated with mass reach.</blockquote><p>Look at what this introduction has accomplished.</p><p>It has already established:</p><p><strong>Context</strong></p><p>→ digital revolution</p><p><strong>Definition</strong></p><p>→ traditional media as an institution</p><p><strong>Question demand</strong></p><p>→ “no longer relevant” = ceased meaningful influence</p><p><strong>Criteria</strong></p><p>→ reach, speed, credibility, agenda-setting, legitimacy</p><p><strong>Stand</strong></p><p>→ lost monopoly ≠ lost relevance</p><p>That is an excellent foundation because your <strong>body paragraphs now have a job</strong>.</p><hr/></div><div class="card source-discussion-card"><h3>3. Now your much more important question: evaluation</h3><p>Let's use your exact scenario.</p><p>Your paragraph is:</p><blockquote><strong>Traditional media remains prevalent and is still used.</strong></blockquote><p>You have:</p><h4>Claim</h4><blockquote>Traditional media remains relevant because established news organisations continue to serve as important sources of information.</blockquote><h4>Example</h4><p>Suppose you use established broadcasters/newspapers during a major crisis.</p><h4>Mechanism</h4><blockquote>Their professional editorial processes allow information to be verified before dissemination.</blockquote><h4>Analysis</h4><blockquote>Therefore, audiences continue to rely on traditional media when accuracy is particularly important, allowing these institutions to retain influence over public understanding despite competition from digital platforms.</blockquote><p>So far:</p><p><strong>Claim → Example → Mechanism → Analysis</strong></p><p>Good.</p><p>Now you reach:</p></div><div class="card source-discussion-card"><h3>EVALUATION</h3><p>This is where you are thinking:</p><blockquote>“Wait. Should I now say something that contradicts my own paragraph?”</blockquote><h4>Not necessarily.</h4><p>Your evaluation should ask:</p><blockquote><strong>How strong is my claim really?</strong></blockquote><p>There are several ways to evaluate it.</p><hr/></div><div class="card source-discussion-card"><h3>4. Four ways you can evaluate a point</h3><h4>A. Strengthen it</h4><p>You discover that your evidence actually makes your argument <strong>stronger</strong>.</p><p>Example:</p><blockquote>This reliance becomes particularly significant during crises, when the cost of misinformation is high and audiences have greater incentives to prioritise verified information over speed.</blockquote><p>You've just made the original point <strong>more significant</strong>.</p><hr/><h4>B. Limit it</h4><p>This is what you're describing.</p><p>You can say:</p><blockquote>However, continued consumption does not necessarily indicate continued dominance. Many younger audiences may encounter a traditional outlet's reporting indirectly through social-media platforms rather than deliberately seeking out the original newspaper or broadcast.</blockquote><p>This <strong>qualifies</strong> your point.</p><p>You're saying:</p><blockquote>Yes, they are still relevant — <strong>but perhaps less deeply / differently than before.</strong></blockquote><p>That is excellent evaluation.</p><hr/><h4>C. Contextualise it</h4><p>You might say:</p><blockquote>Furthermore, this reliance is likely to be stronger among older populations or during periods of crisis than among younger audiences consuming highly personalised digital content.</blockquote><p>Now you've identified a <strong>condition</strong>.</p><p>Your point is:</p><blockquote>true under X circumstances.</blockquote><p>That's evaluation.</p><hr/><h4>D. Compare it</h4><p>This is often extremely powerful for “relevance”, “importance”, “significance”, etc.</p><blockquote>Nevertheless, traditional media's continued use should not be mistaken for equivalent influence: digital platforms now possess greater control over the speed, reach and personalisation of information.</blockquote><p>Now you're evaluating <strong>relative significance</strong>.</p><p>This is often what turns an ordinary paragraph into a sophisticated one.</p><hr/></div><div class="card source-discussion-card"><h3>5. So your proposed evaluation is actually good</h3><p>You said:</p><blockquote>“In today's world we notice traditional reliable news but never do anything to read further; just knowing is enough for us.”</blockquote><p>The underlying idea is actually useful.</p><p>But I'd refine it.</p><p>Your argument is:</p><blockquote><strong>Exposure ≠ meaningful engagement.</strong></blockquote><p>That is a sophisticated distinction.</p><p>You could write:</p><blockquote>However, the continued visibility of traditional media does not necessarily indicate that it retains the depth of influence it once possessed. Audiences may encounter a headline or broadcast report without engaging further with the institution's wider analysis, particularly when social-media platforms provide faster and more personalised summaries. Thus, traditional media may remain relevant as a source of verified information while becoming less relevant as a sustained source of public attention.</blockquote><p><strong>That is excellent evaluation.</strong></p><p>Notice what happened.</p><p>You did <strong>not</strong> destroy your paragraph.</p><p>You refined it.</p><hr/></div><div class="card source-discussion-card"><h3>6. This is the key concept you need to understand</h3><p>Your paragraph doesn't have to end as:</p><blockquote><strong>TRUE</strong></blockquote><p>or</p><blockquote><strong>FALSE</strong></blockquote><p>Instead:</p><blockquote><strong>TRUE → BUT → THEREFORE</strong></blockquote><p>That's evaluation.</p><p>For your paragraph:</p><h4>TRUE</h4><p>Traditional media is still used because of its credibility.</p><p>↓</p><h4>BUT</h4><p>Continued use does not necessarily mean sustained attention or dominance.</p><p>↓</p><h4>THEREFORE</h4><p>Traditional media remains relevant, but its relevance has become <strong>narrower and more specialised</strong>.</p><p>That is much stronger than simply saying:</p><blockquote>“Traditional media is still relevant.”</blockquote><hr/></div><div class="card source-discussion-card"><h3>7. And this answers your question about the link</h3><p>You asked:</p><blockquote>“Do I rebut my contradicting evaluation?”</blockquote><h4>No.</h4><p>You don't necessarily need to say:</p><blockquote>“However, despite everything I just said…”</blockquote><p>and then return to your original claim.</p><p>Instead, your <strong>link should contain the refined judgement you have arrived at</strong>.</p><p>For example:</p><blockquote><strong>Thus, while traditional media can no longer command attention as it once did, its continued role as a trusted source of verified information means that declining audience engagement should not be mistaken for complete irrelevance.</strong></blockquote><p>That's your link.</p><p>Notice:</p><p><strong>Original point:</strong></p><blockquote>Traditional media remains relevant.</blockquote><p><strong>Evaluation:</strong></p><blockquote>But its depth of engagement and dominance have declined.</blockquote><p><strong>Final judgement:</strong></p><blockquote>Therefore it remains relevant, <strong>but in a narrower and reconfigured sense</strong>.</blockquote><p>That's beautiful GP logic.</p><hr/></div><div class="card source-discussion-card"><h3>8. Think of evaluation as a spectrum</h3><p>This is perhaps the easiest way to remember it.</p><p>Your paragraph begins with:</p><blockquote><strong>“My argument is X.”</strong></blockquote><p>Evaluation asks:</p><blockquote><strong>“How true is X?”</strong></blockquote><p>It might conclude:</p><h4>Strongly true</h4><blockquote>X is even more significant than initially suggested.</blockquote><h4>Generally true</h4><blockquote>X remains convincing despite some limitations.</blockquote><h4>Partially true</h4><blockquote>X is true, but only under certain conditions.</blockquote><h4>Weakly true</h4><blockquote>X exists, but its significance has been overstated.</blockquote><h4>False</h4><blockquote>The evidence actually undermines X.</blockquote><p><strong>All five are legitimate evaluation.</strong></p><p>There is no rule saying:</p><blockquote>Evaluation = contradiction.</blockquote><hr/></div><div class="card source-discussion-card"><h3>9. The really important distinction: OV vs evaluation</h3><p>This is where your earlier framework can become confusing.</p><p>Suppose your <strong>Supporting View (SV)</strong> is:</p><blockquote>Traditional media remains relevant.</blockquote><p>Your <strong>Opposing View (OV)</strong> is:</p><blockquote>Traditional media is becoming irrelevant because audiences increasingly rely on digital platforms.</blockquote><p>Within your SV paragraph, you can still evaluate the SV.</p><p>That does <strong>not</strong> automatically make it an OV.</p><p>For example:</p><blockquote>Traditional media remains relevant because of credibility. <strong>However, this relevance is increasingly concentrated in moments where verification matters, rather than everyday information consumption.</strong></blockquote><p>That's still an <strong>SV paragraph</strong>.</p><p>You have evaluated the <strong>extent</strong> of your own argument.</p><p>Your OV comes when you deliberately construct the opposing case:</p><blockquote>Nevertheless, digital platforms increasingly dominate everyday information consumption because they offer greater speed, personalisation and accessibility...</blockquote><p>That's a genuine opposing argument.</p><hr/></div><div class="card source-discussion-card"><h3>10. The structure I want you to internalise</h3><p>For an ordinary <strong>SV paragraph</strong>:</p><h4><strong>CLAIM</strong></h4><p>What am I arguing?</p><p>↓</p><h4><strong>EXAMPLE</strong></h4><p>What real-world evidence demonstrates it?</p><p>↓</p><h4><strong>MECHANISM</strong></h4><p>How does the example produce the claimed effect?</p><p>↓</p><h4><strong>ANALYSIS</strong></h4><p>What does this reveal about the broader issue?</p><p>↓</p><h4><strong>EVALUATION</strong></h4><p>How strong / significant / widespread / sustainable is this?</p><p>↓</p><h4><strong>JUDGEMENT</strong></h4><p>What does this mean for my argument?</p><p>↓</p><h4><strong>LINK</strong></h4><p>How does this answer the exact question?</p><hr/></div><div class="card source-discussion-card"><h3>11. Your paragraph would therefore look like this</h3><h4><strong>CLAIM</strong></h4><blockquote>Traditional media remains relevant because its institutional credibility makes it an important source of verified information.</blockquote><h4><strong>EXAMPLE</strong></h4><blockquote>During major crises, established broadcasters and newspapers continue to provide audiences with professionally verified updates.</blockquote><h4><strong>MECHANISM</strong></h4><blockquote>Their editorial gatekeeping and professional accountability reduce the likelihood that unverified claims are disseminated as established fact.</blockquote><h4><strong>ANALYSIS</strong></h4><blockquote>This gives traditional media an important role in situations where the consequences of misinformation are particularly serious, allowing it to retain influence even when digital platforms dominate everyday information consumption.</blockquote><h4><strong>EVALUATION</strong></h4><blockquote>Nevertheless, continued reliance should not be equated with continued dominance. Younger audiences may encounter reporting from established outlets through social-media platforms rather than directly engaging with the original institution, while short-form content can reduce sustained engagement with detailed reporting. Traditional media therefore retains credibility without necessarily retaining the same depth of audience attention it once commanded.</blockquote><h4><strong>JUDGEMENT / LINK</strong></h4><blockquote>Thus, the decline of sustained engagement weakens traditional media's former monopoly over attention, but does not eliminate its relevance as a trusted producer of information.</blockquote><p><strong>That is exactly what you want.</strong></p><hr/></div><div class="card source-discussion-card"><h3>12. One final distinction: rebuttal vs evaluation</h3><p>This is probably the most important thing to take away.</p><h4>Evaluation:</h4><blockquote><strong>“How strong is my argument?”</strong></blockquote><h4>Counterargument / OV:</h4><blockquote><strong>“What would someone who disagrees with my argument say?”</strong></blockquote><h4>Rebuttal:</h4><blockquote><strong>“Why is that opposing argument ultimately less convincing / limited / conditional?”</strong></blockquote><p>They are related but <strong>not interchangeable</strong>.</p><p>So:</p><blockquote><strong>SV → evaluation</strong></blockquote><p>doesn't have to become:</p><blockquote><strong>SV → OV → rebuttal</strong></blockquote><p>inside every paragraph.</p><p>You can simply do:</p><blockquote><strong>SV → evaluate its extent → judgement</strong></blockquote><p>Then later:</p><blockquote><strong>OV → rebuttal</strong></blockquote><hr/></div><div class="card source-discussion-card"><h3>13. The ultimate mental model</h3><p>When writing an essay, don't think:</p><blockquote><strong>Point → prove point → contradict point → defend point.</strong></blockquote><p>Think:</p><blockquote><strong>Claim → establish → interrogate → weigh → judge.</strong></blockquote><p>That is the difference.</p><p>Your evaluation is basically the moment where you tell the examiner:</p><blockquote><strong>“I know my own argument is not automatically true just because I have an example for it.”</strong></blockquote><p>And that is exactly the kind of thinking that moves an essay away from the <strong>27/50 descriptive-middle-band problem</strong> and towards genuinely sophisticated GP argumentation.</p><h4>Memorise this:</h4><blockquote><strong>EVALUATION DOES NOT MEAN CONTRADICTION.</strong></blockquote><blockquote><strong>Evaluation = testing the strength, extent, significance, conditions and limitations of a claim.</strong></blockquote><blockquote><strong>Your link = the judgement you reach after that testing.</strong></blockquote><p>So if your stand is <strong>“traditional media remains relevant”</strong>, you are completely allowed to conclude a paragraph:</p><blockquote><strong>“Traditional media remains relevant, but its relevance is increasingly concentrated in credibility and knowledge production rather than mass attention.”</strong></blockquote><p>That isn't weakening your stand.</p><p><strong>That is making your stand more precise.</strong></p></div>
+</section></main></div>
+
+
+
+
+
+
+
+
+
+
+
+
 <footer>
 <p>GP Paper 1 Master Essay Playbook • Designed for active revision, not memorisation.</p>
 <p>Core rule: <strong>Answer the exact question. Make claims. Explain mechanisms. Use evidence. Interrogate assumptions. Evaluate continuously. Weigh competing arguments. Make a criteria-based judgement.</strong></p>
 </footer>
-<button class="fab-top" id="fabTop" aria-label="Back to top" type="button"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg></button>
+<button aria-label="Back to top" class="fab-top" id="fabTop" type="button"><svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20"><line x1="12" x2="12" y1="19" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg></button>
 <script>
 (function(){
   var root = document.documentElement;
@@ -1034,6 +1230,65 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--mark-red);outline-o
     sections.forEach(function(s){ observer.observe(s); });
   }
 })();
+</script>
+<script>
+/* v6 sidebar observer */
+document.addEventListener('DOMContentLoaded', function () {
+  const links = Array.from(document.querySelectorAll('.toc-list a[href^="#"]'));
+  const targets = links.map(a => document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+  if (!targets.length) return;
+  const byId = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        links.forEach(a => a.classList.remove('active'));
+        const a = byId.get(entry.target.id);
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-10% 0px -75% 0px', threshold: 0 });
+  targets.forEach(t => observer.observe(t));
+});
+</script>
+<script>
+/* v7: active section tracking for the actual original sidenav */
+document.addEventListener('DOMContentLoaded', function(){
+  const links=[...document.querySelectorAll('#sidenav a[href^="#"]')];
+  const sections=links.map(a=>document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+  if(!sections.length) return;
+  const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        links.forEach(a=>a.classList.remove('active'));
+        const link=links.find(a=>a.getAttribute('href')==='#'+entry.target.id);
+        if(link) link.classList.add('active');
+      }
+    });
+  },{rootMargin:'-12% 0px -75% 0px',threshold:0});
+  sections.forEach(s=>observer.observe(s));
+});
+</script>
+<script>
+/* v8: active section tracking for the actual #sidenav */
+document.addEventListener('DOMContentLoaded', () => {
+  const nav = document.getElementById('sidenav');
+  if (!nav) return;
+  const links = [...nav.querySelectorAll('a[href^="#"]')];
+  const sections = links.map(a => document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+  const obs = new IntersectionObserver(entries => {
+    const visible = entries.filter(e => e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+    if (!visible) return;
+    links.forEach(a => a.classList.remove('active'));
+    const link = links.find(a => a.getAttribute('href') === '#' + visible.target.id);
+    if (link) {
+      link.classList.add('active');
+      const nr = link.getBoundingClientRect();
+      const sr = nav.getBoundingClientRect();
+      if (nr.top < sr.top + 60 || nr.bottom > sr.bottom - 20) link.scrollIntoView({block:'nearest'});
+    }
+  }, {rootMargin:'-8% 0px -72% 0px', threshold:[0,0.25,0.5]});
+  sections.forEach(s => obs.observe(s));
+});
 </script>
 </body>
 </html>
